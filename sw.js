@@ -1,7 +1,7 @@
 /* Gray Code Entertainment — service worker (site root, so its scope
   covers the whole site). Cache-first for the page shell and images
   so the site opens fast and still loads when the connection is spotty. */
-var CACHE = 'gce-v2';
+var CACHE = 'gce-v3';
 var CORE = [
   './',
   '/artists',
