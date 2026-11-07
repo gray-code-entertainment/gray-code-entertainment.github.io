@@ -168,7 +168,7 @@
   .install-txt span{color:#bdb6a8}
   .install-btn{background:var(--gold);color:#111;border:0;border-radius:999px;padding:10px 16px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;flex-shrink:0}
   .install-x{background:transparent;border:0;color:#bdb6a8;font-size:20px;line-height:1;cursor:pointer;padding:4px 6px;flex-shrink:0;font-family:inherit}
-  @media(max-width:480px){.install-txt span{display:none}}
+
   footer{border-top:1px solid var(--line);padding:36px 0 90px;color:var(--muted);font-size:14px}
   .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 </style>
@@ -492,6 +492,7 @@ if ('serviceWorker' in navigator) {
   var hint = document.getElementById('installHint');
   var deferredPrompt = null;
   var dismissed = false;
+  var stepsShown = false;
   var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   if (isStandalone || !banner) return; // already installed — no banner
   var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -514,7 +515,10 @@ if ('serviceWorker' in navigator) {
       triggerInstall.call(deferredPrompt);
       choice.then(function () { deferredPrompt = null; banner.classList.remove('show'); });
     } else if (isIOS) {
-      hint.textContent = '1. Tap the Share icon in Safari’s toolbar. 2. Scroll down and tap “Add to Home Screen”. 3. Tap Add — done.';
+      if (stepsShown) { dismissed = true; banner.classList.remove('show'); return; }
+      stepsShown = true;
+      hint.innerHTML = '1. Tap the <b>Share</b> icon at the bottom of Safari.<br>2. Scroll down and tap <b>“Add to Home Screen”</b>.<br>3. Tap <b>Add</b> — done.';
+      btn.textContent = 'Got it';
     } else {
       hint.textContent = 'Open your browser menu and tap “Add to Home screen” or “Install app”.';
     }
