@@ -243,9 +243,9 @@
 
   <!-- MUSIC -->
   <section id="music" style="padding-top:0"><div class="wrap">
-    <div class="label">Press Play</div>
+    <div class="label">Buy Direct</div>
     <h2>Latest Music</h2>
-    <p class="lead">Out now — HoodBoss's Still 7 and Still 7 Pt. 2, plus Cam Webbe's Beast Mode EP. Tap a project, tap a track; the stream button opens the project you picked. Unreleased projects live in the Coming Soon section below.</p>
+    <p class="lead">Out now — HoodBoss's Still 7 and Still 7 Pt. 2, plus Cam Webbe's Beast Mode EP. Own the full EP for $1 — includes both the explicit and clean versions, emailed to you after checkout. Unreleased projects live in the Coming Soon section below.</p>
 
     <div class="player">
       <div class="player-head">
@@ -259,7 +259,7 @@
       <div id="trackList"></div>
       <div class="nowbar">
         <div style="flex:1;min-width:220px"><strong id="nowTitle">Select a track</strong><div style="color:#bdb6a8;font-size:13px" id="nowArtist">Nothing playing yet — pick a track</div><div class="bar"><i id="prog"></i></div></div>
-        <a class="btn btn-gold" style="padding:10px 16px" id="streamBtn" href="https://album.link/i/1553975832" target="_blank" rel="noopener">Stream Still 7 ↗</a>
+        <a class="btn btn-gold" style="padding:10px 16px" id="streamBtn" href="https://buy.stripe.com/6oUbJ3dc9gN2bi9cEU1Jm02" target="_blank" rel="noopener">Buy Still 7 — $1 ↗</a>
       </div>
     </div>
   </div></section>
@@ -423,16 +423,16 @@
 
 <script>
 var ALBUMS = {
-  still7:{title:"Still 7", meta:"7 tracks • Feb 19, 2021", artist:"HoodBoss", link:"https://album.link/i/1553975832", tracks:[["The Intro","1:13"],["Money Man","2:21"],["Gucci Print x Off White ft. G. Vinci","2:10"],["Purple World","2:18"],["Fly High ft. DOT","2:35"],["Ride with Me ft. Priv","2:56"],["Y.O.U ft. Jay Blick","3:10"]]},
-  still7pt2:{title:"Still 7 Pt. 2", meta:"7 tracks • Apr 20, 2024", artist:"HoodBoss", link:"https://li.sten.to/hoodboss", tracks:[["Stand On Business","1:56"],["Hood Dreams","2:00"],["No Love","1:48"],["Izm","1:26"],["Demon Time","1:19"],["Spaceships","2:08"],["Outta Line","1:25"]]},
-  beast:{title:"Beast Mode EP", meta:"3 tracks • May 1, 2026 • via EMPIRE", artist:"Cam Webbe", link:"https://empire.ffm.to/beastmodecam", tracks:[["Beast Mode","2:25"],["Fuck the Streets","2:57"],["Folded","2:02"]]}
+  still7:{title:"Still 7", meta:"7 tracks • Feb 19, 2021", artist:"HoodBoss", link:"https://buy.stripe.com/6oUbJ3dc9gN2bi9cEU1Jm02", tracks:[["The Intro","1:13"],["Money Man","2:21"],["Gucci Print x Off White ft. G. Vinci","2:10"],["Purple World","2:18"],["Fly High ft. DOT","2:35"],["Ride with Me ft. Priv","2:56"],["Y.O.U ft. Jay Blick","3:10"]]},
+  still7pt2:{title:"Still 7 Pt. 2", meta:"7 tracks • Apr 20, 2024", artist:"HoodBoss", link:"https://buy.stripe.com/14A4gBegdcwMgCtdIY1Jm03", tracks:[["Stand On Business","1:56"],["Hood Dreams","2:00"],["No Love","1:48"],["Izm","1:26"],["Demon Time","1:19"],["Spaceships","2:08"],["Outta Line","1:25"]]},
+  beast:{title:"Beast Mode EP", meta:"3 tracks • May 1, 2026 • via EMPIRE", artist:"Cam Webbe", link:"https://buy.stripe.com/9B6cN77RP7cs1Hz34k1Jm04", tracks:[["Beast Mode","2:25"],["Fuck the Streets","2:57"],["Folded","2:02"]]}
 };
 var current='still7', playingIdx=-1, timer=null;
 function renderTracks(){
   var a=ALBUMS[current];
   document.getElementById('albumMeta').textContent=a.meta;
   document.getElementById('streamBtn').href=a.link;
-  document.getElementById('streamBtn').textContent='Stream '+a.title+' ↗';
+  document.getElementById('streamBtn').textContent='Buy '+a.title+' — $1 ↗';
   var html='';
   a.tracks.forEach(function(t,i){
     html+='<div class="track'+(i===playingIdx?' playing':'')+'" onclick="playTrack('+i+')"><span class="num">'+(i===playingIdx?'▶':(i+1))+'</span><b>'+t[0]+'</b><small>'+(t[1]||'')+'</small></div>';
@@ -442,7 +442,7 @@ function renderTracks(){
 function playTrack(i){
   var a=ALBUMS[current]; playingIdx=i;
   document.getElementById('nowTitle').textContent=a.tracks[i][0];
-  document.getElementById('nowArtist').textContent=a.artist+' • '+a.meta+' — tap streaming to listen';
+  document.getElementById('nowArtist').textContent=a.artist+' • '+a.meta+' — tap Buy to own the EP for $1';
   document.getElementById('prog').style.width='12%';
   clearInterval(timer); var p=12;
   timer=setInterval(function(){ p=Math.min(p+4,96); document.getElementById('prog').style.width=p+'%'; if(p>=96) clearInterval(timer); },500);
