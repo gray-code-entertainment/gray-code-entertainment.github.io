@@ -53,6 +53,14 @@
   .links a{text-decoration:none;opacity:.85} .links a:hover{opacity:1;color:var(--gold)}
   .nav-cta{background:var(--gold);color:#111!important;padding:9px 16px;border-radius:999px;opacity:1!important}
   @media(max-width:760px){.links a:not(.nav-cta){display:none}}
+  .menu-btn{display:none;background:transparent;border:1px solid var(--line);color:var(--text);font-size:22px;line-height:1;padding:8px 12px;border-radius:10px;cursor:pointer;font-family:inherit}
+  .mobile-menu{display:none}
+  @media(max-width:760px){
+    .menu-btn{display:block}
+    .mobile-menu.open{display:block;border-top:1px solid var(--line);background:var(--bg)}
+    .mobile-menu a{display:block;padding:14px 20px;text-decoration:none;font-weight:700;border-bottom:1px solid var(--line)}
+    .mobile-menu a:last-child{border-bottom:0}
+  }
   /* Hero */
   .hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden;background:#000}
   .hero img.bg, .hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
@@ -180,6 +188,17 @@
     <a href="artists.html">Artists</a><a href="models.html">Models</a><a href="music.html">Music</a><a href="coming-soon.html">Coming Soon</a><a href="store.html">Store</a><a href="services.html">Services</a><a href="booking.html">Booking</a>
     <a class="nav-cta" href="booking.html">Book an Artist</a>
   </nav>
+  <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="artists.html">Artists</a>
+  <a href="models.html">Models</a>
+  <a href="music.html">Music</a>
+  <a href="coming-soon.html">Coming Soon</a>
+  <a href="store.html">Store</a>
+  <a href="services.html">Services</a>
+  <a href="booking.html">Booking</a>
 </div></header>
 
 <main id="top">
@@ -271,6 +290,14 @@ if ('serviceWorker' in navigator) {
   });
   window.addEventListener('appinstalled', function () { banner.classList.remove('show'); });
 })();
+</script>
+<script>
+function toggleMenu(btn){
+  var m=document.getElementById('mobileMenu');
+  var open=m.classList.toggle('open');
+  btn.setAttribute('aria-expanded',open?'true':'false');
+  btn.textContent=open?'\u00d7':'\u2630';
+}
 </script>
 </body>
 </html>
