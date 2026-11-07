@@ -1,10 +1,16 @@
 /* Gray Code Entertainment — service worker (site root, so its scope
-   covers the whole site). Cache-first for the page shell and images
-   so the site opens fast and still loads when the connection is spotty. */
-var CACHE = 'gce-v1';
+  covers the whole site). Cache-first for the page shell and images
+  so the site opens fast and still loads when the connection is spotty. */
+var CACHE = 'gce-v2';
 var CORE = [
   './',
-  'index.html',
+  '/artists',
+  '/booking',
+  '/coming-soon',
+  '/models',
+  '/music',
+  '/services',
+  '/store',
   'assets/manifest.json',
   'assets/icon-192.png',
   'assets/icon-512.png',
@@ -45,35 +51,39 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function (event) {
   var req = event.request;
   if (req.method !== 'GET') return;
-
   // Page navigations: network first, fall back to the cached page offline.
   if (req.mode === 'navigate') {
     event.respondWith(
       fetch(req).then(function (res) {
         var copy = res.clone();
-        caches.open(CACHE).then(function (cache) { cache.put('index.html', copy); });
+        caches.open(CACHE).then(function (cache) { cache.put(req, copy); });
         return res;
       }).catch(function () {
-        return caches.match('index.html').then(function (hit) {
+        return caches.match(req, { ignoreSearch: true }).then(function (hit) {
           return hit || caches.match('./');
         });
       })
     );
     return;
   }
-
-  // Everything else (images, icons, fonts, video): cache first,
-  // then network — and stash fresh copies for next time.
+  // Everything else: cache first, refresh the cache in the background.
   event.respondWith(
-    caches.match(req).then(function (hit) {
-      if (hit) return hit;
-      return fetch(req).then(function (res) {
-        if (res && (res.status === 200 || res.type === 'opaque')) {
+    caches.match(req, { ignoreSearch: true }).then(function (hit) {
+      var network = fetch(req).then(function (res) {
+        if (res.ok) {
           var copy = res.clone();
           caches.open(CACHE).then(function (cache) { cache.put(req, copy); });
         }
         return res;
-      }).catch(function () { return hit; });
+      }).catch(function () { });
+      return hit || network;
     })
   );
+});
+
+// Bypass the service worker for Stripe checkout links.
+self.addEventListener('fetch', function (event) {
+  if (event.request.url.indexOf('buy.stripe.com') !== -1) {
+    event.respondWith(fetch(event.request));
+  }
 });
