@@ -98,7 +98,7 @@
   @media(max-width:480px){.hero h1{font-size:34px}.hero h1 em{font-size:.78em}}
   .hero p{max-width:620px;font-size:18px;color:#e8e2d6;margin:0}
   .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:800;text-decoration:none;font-size:15px;border:1px solid transparent;cursor:pointer}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:800;text-decoration:none;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:inherit}
   .btn-gold{background:var(--gold);color:#111} .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.35);backdrop-filter:blur(6px)}
   .hero-meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.22);font-size:13px}
   .hero-meta b{display:block;font-size:20px;font-family:"Anton";letter-spacing:.03em}
@@ -125,6 +125,16 @@
   .chip{border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:13px;font-weight:700;background:var(--bg2)}
   .artist-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
   .btn-dark{background:var(--text);color:var(--bg)} .btn-outline{background:transparent;color:var(--text);border-color:var(--line)}
+  /* Streaming platforms popup */
+  .stream-modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.72);padding:20px}
+  .stream-modal.open{display:flex}
+  .stream-panel{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:20px;max-width:420px;width:100%;padding:28px;position:relative}
+  .stream-panel h3{font-family:"Anton";font-size:28px;margin:0 0 4px;text-transform:uppercase}
+  .stream-panel p{color:var(--muted);margin:0 0 18px;font-size:14px}
+  .stream-links{display:grid;gap:10px}
+  .stream-links a{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;font-weight:800;background:var(--bg2)}
+  .stream-links a:hover{border-color:var(--gold)}
+  .stream-x{position:absolute;top:12px;right:16px;background:transparent;border:0;color:var(--muted);font-size:26px;line-height:1;cursor:pointer;font-family:inherit}
   /* Cover art strip (Music) */
   .covers{display:flex;flex-wrap:wrap;gap:14px;margin-top:22px}
   .covers figure{margin:0;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 16px 10px 10px}
@@ -242,8 +252,7 @@
           <p>Boston rapper HoodBoss. Debut project <strong>Still 7</strong> (Feb 2021), follow-up <strong>Still 7 Pt. 2</strong> (2024), and his new 7-track project <strong>The Last 7</strong> — finished and ready to tour behind.</p>
           <div class="chips"><span class="chip">Still 7</span><span class="chip">Still 7 Pt. 2</span><span class="chip">The Last 7</span><span class="chip">Demon Time — Video Out</span></div>
           <div class="artist-actions">
-            <a class="btn btn-dark" href="https://open.spotify.com/artist/3i3E30KdoVYzlI1Kfwz4km" target="_blank" rel="noopener">Streaming Platforms ↗</a>
-            <a class="btn btn-outline" href="https://music.apple.com/us/artist/hoodboss/1195479928" target="_blank" rel="noopener">Apple Music ↗</a>
+            <button class="btn btn-dark" type="button" onclick="openStream('stream-hoodboss')">Streaming Platforms</button>
             <a class="btn btn-outline" href="/booking?artist=HoodBoss">Book HoodBoss</a>
           </div>
         </div>
@@ -257,8 +266,7 @@
           <p><strong>Beast Mode</strong> EP via EMPIRE (May 1, 2026) — Beast Mode, Fuck the Streets, Folded — plus the <strong>Motion</strong> EP, coming soon. High-energy live set, built for crowds.</p>
           <div class="chips"><span class="chip">Beast Mode EP</span><span class="chip">Motion EP</span><span class="chip">Folded</span><span class="chip">Via EMPIRE</span></div>
           <div class="artist-actions">
-            <a class="btn btn-dark" href="https://open.spotify.com/artist/6bRzREconywJGY4zOBzjYQ" target="_blank" rel="noopener">Streaming Platforms ↗</a>
-            <a class="btn btn-outline" href="https://music.apple.com/us/artist/cam-webbe/1470174986" target="_blank" rel="noopener">Apple Music ↗</a>
+            <button class="btn btn-dark" type="button" onclick="openStream('stream-camwebbe')">Streaming Platforms</button>
             <a class="btn btn-outline" href="/booking?artist=Cam Webbe">Book Cam Webbe</a>
           </div>
         </div>
@@ -267,6 +275,31 @@
   </div></section>
 
 </main>
+
+<!-- Streaming platforms popups -->
+<div class="stream-modal" id="stream-hoodboss" role="dialog" aria-label="HoodBoss streaming platforms">
+  <div class="stream-panel">
+    <button class="stream-x" type="button" aria-label="Close" onclick="closeStream('stream-hoodboss')">×</button>
+    <h3>HoodBoss</h3>
+    <p>Stream HoodBoss on your platform of choice.</p>
+    <div class="stream-links">
+      <a href="https://open.spotify.com/artist/3i3E30KdoVYzlI1Kfwz4km" target="_blank" rel="noopener">Spotify <span>↗</span></a>
+      <a href="https://music.apple.com/us/artist/hoodboss/1195479928" target="_blank" rel="noopener">Apple Music <span>↗</span></a>
+      <a href="https://www.deezer.com/artist/11703029" target="_blank" rel="noopener">Deezer <span>↗</span></a>
+    </div>
+  </div>
+</div>
+<div class="stream-modal" id="stream-camwebbe" role="dialog" aria-label="Cam Webbe streaming platforms">
+  <div class="stream-panel">
+    <button class="stream-x" type="button" aria-label="Close" onclick="closeStream('stream-camwebbe')">×</button>
+    <h3>Cam Webbe</h3>
+    <p>Stream Cam Webbe on your platform of choice.</p>
+    <div class="stream-links">
+      <a href="https://open.spotify.com/artist/6bRzREconywJGY4zOBzjYQ" target="_blank" rel="noopener">Spotify <span>↗</span></a>
+      <a href="https://music.apple.com/us/artist/cam-webbe/1470174986" target="_blank" rel="noopener">Apple Music <span>↗</span></a>
+    </div>
+  </div>
+</div>
 
 <footer><div class="wrap foot">
   <div><strong style="color:var(--text)">GRAY CODE ENTERTAINMENT</strong><br>Boston, MA • Artist Management, Entertainment, Media &amp; Events<br>Booking: bookgce@gmail.com</div>
@@ -343,6 +376,10 @@ function toggleMenu(btn){
   btn.setAttribute('aria-expanded',open?'true':'false');
   btn.textContent=open?'\u00d7':'\u2630';
 }
+function openStream(id){document.getElementById(id).classList.add('open')}
+function closeStream(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.stream-modal').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)m.classList.remove('open')})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.stream-modal.open').forEach(function(m){m.classList.remove('open')})});
 </script>
 </body>
 </html>
