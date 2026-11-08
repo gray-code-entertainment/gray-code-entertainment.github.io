@@ -61,112 +61,53 @@
     .mobile-menu a{display:block;padding:14px 20px;text-decoration:none;font-weight:700;border-bottom:1px solid var(--line)}
     .mobile-menu a:last-child{border-bottom:0}
   }
-  /* Hero */
-  .hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden;background:#000}
-  .hero img.bg, .hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
-  .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.92) 8%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.15))}
-  .hero-in{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:56px 20px 52px;width:100%;color:#fff}
-  .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.35);padding:6px 12px;border-radius:999px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
-  .pill i{width:7px;height:7px;background:var(--gold);border-radius:50%;display:block}
-  .hero h1{font-family:"Anton";font-size:clamp(36px,7vw,84px);line-height:.95;margin:18px 0 14px;text-transform:uppercase;max-width:820px;overflow-wrap:normal;word-break:normal}
-  .hero h1 em{color:var(--gold);font-style:normal;display:block;font-size:.86em;letter-spacing:-.01em;white-space:nowrap}
-  @media(max-width:480px){.hero h1{font-size:34px}.hero h1 em{font-size:.78em}}
-  .hero p{max-width:620px;font-size:18px;color:#e8e2d6;margin:0}
-  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:800;text-decoration:none;font-size:15px;border:1px solid transparent;cursor:pointer}
-  .btn-gold{background:var(--gold);color:#111} .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.35);backdrop-filter:blur(6px)}
-  .hero-meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.22);font-size:13px}
-  .hero-meta b{display:block;font-size:20px;font-family:"Anton";letter-spacing:.03em}
-  .hero-meta span{color:#cbc4b6;letter-spacing:.08em;text-transform:uppercase;font-size:11px}
   /* Layout */
   .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
   section{padding:72px 0}
   .label{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:800}
   h2{font-family:"Anton";text-transform:uppercase;font-size:clamp(32px,5vw,52px);line-height:1;margin:10px 0 12px;letter-spacing:.02em}
   .lead{color:var(--muted);max-width:680px;font-size:17px}
-  /* Artists */
-  .artist-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
-  @media(max-width:820px){.artist-grid{grid-template-columns:1fr}}
-  .artist{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
-  .artist figure{position:relative;margin:0}
-  .artist img{width:100%;height:340px;object-fit:cover;display:block}
-  .artist img.portrait-top{object-position:center top}
-  .photo-note{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.82);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
-  .artist-body{padding:24px}
-  .artist h3{font-family:"Anton";font-size:36px;margin:0;text-transform:uppercase;letter-spacing:.02em}
-  .tagline{color:var(--gold);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
-  .artist p{color:var(--muted)}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
-  .chip{border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:13px;font-weight:700;background:var(--bg2)}
-  .artist-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-  .btn-dark{background:var(--text);color:var(--bg)} .btn-outline{background:transparent;color:var(--text);border-color:var(--line)}
-  /* Cover art strip (Music) */
-  .covers{display:flex;flex-wrap:wrap;gap:14px;margin-top:22px}
-  .covers figure{margin:0;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 16px 10px 10px}
-  .covers img{width:64px;height:64px;object-fit:cover;border-radius:8px;display:block}
-  .covers figcaption{font-size:13px;line-height:1.35}
-  .covers figcaption b{display:block;font-size:14px}
-  .covers figcaption span{color:var(--muted)}
-  /* Featured release */
-  .feature{display:flex;margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
-  .feature img{width:290px;aspect-ratio:9/16;object-fit:cover;display:block;flex-shrink:0}
-  .feature-txt{padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
-  .feature-txt h3{font-family:"Anton";text-transform:uppercase;font-size:clamp(28px,4vw,44px);line-height:1;margin:8px 0 10px}
-  .feature-txt p{color:var(--muted);margin:0 0 18px;max-width:520px}
-  .feature.coming-soon figure{position:relative;margin:0;flex-shrink:0;line-height:0}
-  .feature.coming-soon img{width:360px;max-width:100%;aspect-ratio:1/1;object-fit:cover}
-  .coming-badge{position:absolute;left:14px;bottom:14px;background:var(--gold);color:#111;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;border-radius:999px;line-height:1}
-  .coming-tag{display:inline-block;background:var(--gold);color:#111;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:999px}
-  @media(max-width:640px){.feature{flex-direction:column}.feature img{width:100%;height:360px;aspect-ratio:auto}.feature.coming-soon img{width:100%;height:auto;aspect-ratio:1/1}}
-  /* Music player */
-  .player{background:var(--bg2);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:28px}
-  .player-head{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
-  .tabs{display:flex;gap:8px;flex-wrap:wrap}
-  .tab{padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--text);font-weight:800;cursor:pointer}
-  .tab.active{background:var(--gold);color:#111;border-color:var(--gold)}
-  .track{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--line);cursor:pointer}
+  /* EP grid — big covers, tap to open detail */
+  .ep-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
+  @media(max-width:640px){.ep-grid{grid-template-columns:1fr}}
+  .ep-card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit;width:100%}
+  .ep-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+  .ep-card-body{padding:20px 22px 22px}
+  .ep-card h3{font-family:"Anton";font-size:30px;margin:0;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+  .ep-card .tagline{color:var(--gold);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;margin-top:6px}
+  .ep-card .meta{color:var(--muted);font-size:14px;margin:6px 0 0}
+  .ep-card .open-hint{display:inline-block;margin-top:14px;font-weight:800;font-size:14px;color:var(--text);border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:var(--bg2)}
+  .ep-card:hover .open-hint{background:var(--gold);color:#111;border-color:var(--gold)}
+  /* Detail view (modal) */
+  .detail{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.88);display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .detail.open{display:block}
+  .detail-panel{position:relative;max-width:860px;margin:24px auto;background:var(--bg);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .detail-bgvideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28;pointer-events:none}
+  .detail-scrim{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.15) 40%, var(--bg) 78%);pointer-events:none}
+  .detail-inner{position:relative;z-index:1}
+  .detail-close{position:absolute;top:12px;right:12px;z-index:3;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(0,0,0,.65);color:#fff;font-size:22px;line-height:1;cursor:pointer;font-family:inherit}
+  .detail-covers{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:20px 20px 0}
+  .detail-covers.single{grid-template-columns:min(420px,100%);justify-content:center}
+  .detail-covers img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;display:block}
+  .detail-covers figcaption{font-size:12px;color:var(--muted);text-align:center;margin-top:6px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  .detail-body{padding:20px 24px 26px}
+  .detail-body h3{font-family:"Anton";text-transform:uppercase;font-size:clamp(30px,5vw,44px);line-height:1;margin:6px 0 4px}
+  .detail-body .tagline{color:var(--gold);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+  .detail-body .meta{color:var(--muted);font-size:14px;margin:6px 0 0}
+  .detail-body .desc{color:var(--text);margin:14px 0 0;max-width:640px}
+  .detail-tracks{margin-top:20px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg2)}
+  .detail-tracks-head{padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted);font-weight:700}
+  .track{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--line);cursor:pointer}
+  .track:last-child{border-bottom:0}
   .track:hover{background:color-mix(in srgb, var(--gold) 6%, transparent)}
   .track.playing{background:color-mix(in srgb, var(--gold) 10%, transparent)}
   .num{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0}
   .track.playing .num{background:var(--gold);color:#111;border-color:var(--gold)}
   .track b{flex:1} .track small{color:var(--muted)}
-  .nowbar{padding:14px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#111;color:#fff;font-size:14px}
-  @media (prefers-color-scheme: light){.nowbar{background:#161513}}
-  .bar{height:4px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden;margin-top:8px}
-  .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .4s}
-  /* Store */
-  .store-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
-  @media(max-width:820px){.store-grid{grid-template-columns:1fr}}
-  .product{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
-  .product figure{position:relative;margin:0;background:var(--gold);line-height:0}
-  .product img{width:100%;aspect-ratio:2/1;object-fit:cover;display:block}
-  .product-body{padding:24px}
-  .product-body h3{font-family:"Anton";font-size:30px;margin:0;text-transform:uppercase;letter-spacing:.02em}
-  .product-body p{color:var(--muted)}
-  .price{font-family:"Anton";font-size:26px;letter-spacing:.03em;color:var(--gold);margin:10px 0 0}
-  /* Services */
-  .svc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
-  @media(max-width:900px){.svc{grid-template-columns:1fr 1fr}} @media(max-width:520px){.svc{grid-template-columns:1fr}}
-  .svc-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
-  .svc-card .icon{font-size:28px;margin-bottom:12px}
-  .svc-card h3{margin:0 0 8px;font-size:18px} .svc-card p{color:var(--muted);font-size:14px;margin:0}
-  /* Business card feature */
-  .bizcard{margin-top:20px;background:#0b0b0c;border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;gap:28px;align-items:center}
-  .bizcard img{height:400px;width:auto;max-width:100%;border-radius:10px;display:block;flex-shrink:0}
-  .bizcard-txt{flex:1;min-width:230px;color:#f5f1e8}
-  .bizcard-txt h3{font-family:"Anton";text-transform:uppercase;font-size:30px;line-height:1.05;margin:8px 0 10px}
-  .bizcard-txt p{color:#bdb6a8;max-width:430px;margin:0 0 20px}
-  @media(max-width:680px){.bizcard{flex-direction:column;align-items:flex-start}.bizcard img{height:auto;width:min(300px,100%)}}
-  /* Booking */
-  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:start}
-  @media(max-width:860px){.split{grid-template-columns:1fr}}
-  .form{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px}
-  .form label{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;display:block;margin:14px 0 6px}
-  .form input,.form select,.form textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--text);font:inherit}
-  .form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px} @media(max-width:520px){.form .row{grid-template-columns:1fr}}
-  .steps{display:grid;gap:14px;margin-top:20px}
-  .step{display:flex;gap:14px} .step-n{width:36px;height:36px;border-radius:50%;background:var(--gold);color:#111;display:grid;place-items:center;font-weight:900;flex-shrink:0}
-  .step p{margin:2px 0;color:var(--muted);font-size:14px} .step b{font-size:15px}
+  .detail-buy{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
+  .detail-now{font-size:13px;color:var(--muted);font-weight:700}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:800;text-decoration:none;font-size:15px;border:1px solid transparent;cursor:pointer}
+  .btn-gold{background:var(--gold);color:#111}
   /* Install banner (PWA) */
   .install-banner{position:fixed;left:12px;right:12px;bottom:12px;z-index:50;display:none;align-items:center;gap:12px;background:#101012;color:#f5f1e8;border:1px solid #333338;border-top:3px solid var(--gold);border-radius:14px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.5);max-width:560px;margin:0 auto}
   .install-banner.show{display:flex}
@@ -207,33 +148,76 @@
     <div class="label">Buy Direct</div>
     <h2>Latest Music</h2>
     <p class="lead">Out now — HoodBoss's Still 7, Still 7 Pt. 2, and The Last 7, plus Cam Webbe's Beast Mode EP. Own the full EP for $1 — includes both the explicit and clean versions, emailed to you after checkout. Cam Webbe's Motion EP is still on the way — find it under Coming Soon.</p>
+    <p style="color:var(--muted);font-size:14px;margin:18px 0 0">Tap a cover to open the EP — big front and back art, the story, every track with a 30-second preview, and the $1 buy button.</p>
 
-    <div class="covers">
-      <figure><img src="assets/hoodboss-last7.jpg" alt="Cover art for The Last 7 by HoodBoss" /><figcaption><b>The Last 7</b><span>HoodBoss — Out now — <a href="https://buy.stripe.com/14AcN7egd40gbi9bAQ1Jm05" target="_blank" rel="noopener">Buy — $1 ↗</a></span></figcaption></figure><figure><img src="assets/Hoodboss-The-Last-7-back-cover-v7-7logo.jpg" alt="Back cover art for The Last 7 by HoodBoss" /><figcaption><b>The Last 7 — Back cover</b><span>HoodBoss — Back cover</span></figcaption></figure>
-      
-    </div>
-
-    <div class="player">
-      <div class="player-head">
-        <div class="tabs" role="tablist">
-          <button class="tab active" data-album="still7">HoodBoss — Still 7</button>
-          <button class="tab" data-album="still7pt2">HoodBoss — Still 7 Pt. 2</button>
-          <button class="tab" data-album="last7">HoodBoss — The Last 7</button>
-          <button class="tab" data-album="beast">Cam Webbe — Beast Mode</button>
-        </div>
-        <small style="color:var(--muted);font-weight:700" id="albumMeta">7 tracks • Feb 19, 2021</small>
-      </div>
-      <p style="color:var(--muted);font-size:13px;margin:8px 0 0">Tap a track to hear a 30-second preview.</p>
-      <div id="trackList"></div>
-      <audio id="player" preload="none"></audio>
-      <div class="nowbar">
-        <div style="flex:1;min-width:220px"><strong id="nowTitle">Select a track</strong><div style="color:#bdb6a8;font-size:13px" id="nowArtist">Nothing playing yet — pick a track</div><div class="bar"><i id="prog"></i></div></div>
-        <a class="btn btn-gold" style="padding:10px 16px" id="streamBtn" href="https://buy.stripe.com/6oUbJ3dc9gN2bi9cEU1Jm02" target="_blank" rel="noopener">Buy Still 7 — $1 ↗</a>
-      </div>
+    <div class="ep-grid">
+      <button class="ep-card" type="button" onclick="openDetail('still7')">
+        <img src="assets/still7-cover.jpg" alt="Cover art for Still 7 by HoodBoss" />
+        <span class="ep-card-body" style="display:block">
+          <h3>Still 7</h3>
+          <span class="tagline">HoodBoss</span>
+          <p class="meta">7 tracks • Feb 19, 2021</p>
+          <span class="open-hint">Tap to open →</span>
+        </span>
+      </button>
+      <button class="ep-card" type="button" onclick="openDetail('still7pt2')">
+        <img src="assets/still7-pt2-cover.jpg" alt="Cover art for Still 7 Pt. 2 by HoodBoss" />
+        <span class="ep-card-body" style="display:block">
+          <h3>Still 7 Pt. 2</h3>
+          <span class="tagline">HoodBoss</span>
+          <p class="meta">7 tracks • Apr 20, 2024</p>
+          <span class="open-hint">Tap to open →</span>
+        </span>
+      </button>
+      <button class="ep-card" type="button" onclick="openDetail('last7')">
+        <img src="assets/hoodboss-last7.jpg" alt="Cover art for The Last 7 by HoodBoss" />
+        <span class="ep-card-body" style="display:block">
+          <h3>The Last 7</h3>
+          <span class="tagline">HoodBoss</span>
+          <p class="meta">7 tracks • Nov 7, 2026</p>
+          <span class="open-hint">Tap to open →</span>
+        </span>
+      </button>
+      <button class="ep-card" type="button" onclick="openDetail('beast')">
+        <img src="assets/beast-mode-cover.jpg" alt="Cover art for the Beast Mode EP by Cam Webbe" />
+        <span class="ep-card-body" style="display:block">
+          <h3>Beast Mode EP</h3>
+          <span class="tagline">Cam Webbe</span>
+          <p class="meta">3 tracks • May 1, 2026 • via EMPIRE</p>
+          <span class="open-hint">Tap to open →</span>
+        </span>
+      </button>
     </div>
   </div></section>
 
 </main>
+
+<!-- EP DETAIL VIEW -->
+<div class="detail" id="detail" role="dialog" aria-modal="true" aria-label="EP details" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-panel" id="detailPanel">
+    <video class="detail-bgvideo" id="detailBg" muted loop playsinline preload="none"></video>
+    <div class="detail-scrim" id="detailScrim" style="display:none"></div>
+    <div class="detail-inner">
+      <button class="detail-close" type="button" aria-label="Close" onclick="closeDetail()">×</button>
+      <div class="detail-covers" id="detailCovers"></div>
+      <div class="detail-body">
+        <span class="tagline" id="detailArtist"></span>
+        <h3 id="detailTitle"></h3>
+        <p class="meta" id="detailMeta"></p>
+        <p class="desc" id="detailDesc"></p>
+        <div class="detail-tracks">
+          <div class="detail-tracks-head">Tap a track to hear a 30-second preview.</div>
+          <div id="detailTracks"></div>
+        </div>
+        <div class="detail-buy">
+          <a class="btn btn-gold" id="detailBuy" href="#" target="_blank" rel="noopener">Buy — $1 ↗</a>
+          <span class="detail-now" id="detailNow">Nothing playing yet — pick a track</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<audio id="player" preload="none"></audio>
 
 <footer><div class="wrap foot">
   <div><strong style="color:var(--text)">GRAY CODE ENTERTAINMENT</strong><br>Boston, MA • Artist Management, Entertainment, Media &amp; Events<br>Booking: bookgce@gmail.com</div>
@@ -250,52 +234,67 @@
 
 <script>
 var ALBUMS = {
-  still7:{title:"Still 7", meta:"7 tracks • Feb 19, 2021", artist:"HoodBoss", link:"https://buy.stripe.com/6oUbJ3dc9gN2bi9cEU1Jm02", tracks:[["The Intro","1:13","assets/previews/still7-01-the-intro.mp3"],["Money Man","2:21","assets/previews/still7-02-money-man.mp3"],["Gucci Print x Off White ft. G. Vinci","2:10","assets/previews/still7-03-gucci-print.mp3"],["Purple World","2:18","assets/previews/still7-04-purple-world.mp3"],["Fly High ft. DOT","2:35","assets/previews/still7-05-fly-high.mp3"],["Ride with Me ft. Priv","2:56","assets/previews/still7-06-ride-with-me.mp3"],["Y.O.U ft. Jay Blick","3:10","assets/previews/still7-07-y-o-u.mp3"]]},
-  still7pt2:{title:"Still 7 Pt. 2", meta:"7 tracks • Apr 20, 2024", artist:"HoodBoss", link:"https://buy.stripe.com/14A4gBegdcwMgCtdIY1Jm03", tracks:[["Stand On Business","1:56","assets/previews/pt2-01-stand-on-business.mp3"],["Hood Dreams","2:00","assets/previews/pt2-02-hood-dreams.mp3"],["No Love","1:48","assets/previews/pt2-03-no-love.mp3"],["Izm","1:26","assets/previews/pt2-04-izm.mp3"],["Demon Time","1:19","assets/previews/pt2-05-demon-time.mp3"],["Spaceships","2:08","assets/previews/pt2-06-spaceships.mp3"],["Outta Line","1:25","assets/previews/pt2-07-outta-line.mp3"]]},
-  last7:{title:"The Last 7", meta:"7 tracks • Nov 7, 2026", artist:"HoodBoss", link:"https://buy.stripe.com/14AcN7egd40gbi9bAQ1Jm05", tracks:[["Cyber Truck","1:24","assets/previews/last7-01-cyber-truck.mp3"],["Disrespectful","2:02","assets/previews/last7-02-disrespectful.mp3"],["Stop","1:50","assets/previews/last7-03-stop.mp3"],["Wild Side","2:08","assets/previews/last7-04-wild-side.mp3"],["Fallen Soldiers Pt. 2","2:14","assets/previews/last7-05-fallen-soldiers-pt-2.mp3"],["On My Mind","2:04","assets/previews/last7-06-on-my-mind.mp3"],["Seen It All","1:23","assets/previews/last7-07-seen-it-all.mp3"]]},
-  beast:{title:"Beast Mode EP", meta:"3 tracks • May 1, 2026 • via EMPIRE", artist:"Cam Webbe", link:"https://buy.stripe.com/9B6cN77RP7cs1Hz34k1Jm04", tracks:[["Beast Mode","2:25","assets/previews/beast-01-beast-mode.mp3"],["Fuck the Streets","2:57","assets/previews/beast-02-fuck-the-streets.mp3"],["Folded","2:02","assets/previews/beast-03-folded.mp3"]]}
+  still7:{title:"Still 7", meta:"7 tracks • Feb 19, 2021", artist:"HoodBoss", link:"https://buy.stripe.com/6oUbJ3dc9gN2bi9cEU1Jm02", front:"assets/still7-cover.jpg", back:"assets/still7-cover-back.jpg", bgvideo:"assets/gucciprint-bg-clip.mp4", desc:"HoodBoss's debut project. Released Feb 19, 2021.", tracks:[["The Intro","1:13","assets/previews/still7-01-the-intro.mp3"],["Money Man","2:21","assets/previews/still7-02-money-man.mp3"],["Gucci Print x Off White ft. G. Vinci","2:10","assets/previews/still7-03-gucci-print.mp3"],["Purple World","2:18","assets/previews/still7-04-purple-world.mp3"],["Fly High ft. DOT","2:35","assets/previews/still7-05-fly-high.mp3"],["Ride with Me ft. Priv","2:56","assets/previews/still7-06-ride-with-me.mp3"],["Y.O.U ft. Jay Blick","3:10","assets/previews/still7-07-y-o-u.mp3"]]},
+  still7pt2:{title:"Still 7 Pt. 2", meta:"7 tracks • Apr 20, 2024", artist:"HoodBoss", link:"https://buy.stripe.com/14A4gBegdcwMgCtdIY1Jm03", front:"assets/still7-pt2-cover.jpg", back:null, bgvideo:"assets/standonbusiness-bg-clip.mp4", desc:"The follow-up to Still 7. Released Apr 20, 2024.", tracks:[["Stand On Business","1:56","assets/previews/pt2-01-stand-on-business.mp3"],["Hood Dreams","2:00","assets/previews/pt2-02-hood-dreams.mp3"],["No Love","1:48","assets/previews/pt2-03-no-love.mp3"],["Izm","1:26","assets/previews/pt2-04-izm.mp3"],["Demon Time","1:19","assets/previews/pt2-05-demon-time.mp3"],["Spaceships","2:08","assets/previews/pt2-06-spaceships.mp3"],["Outta Line","1:25","assets/previews/pt2-07-outta-line.mp3"]]},
+  last7:{title:"The Last 7", meta:"7 tracks • Nov 7, 2026", artist:"HoodBoss", link:"https://buy.stripe.com/14AcN7egd40gbi9bAQ1Jm05", front:"assets/hoodboss-last7.jpg", back:"assets/Hoodboss-The-Last-7-back-cover-v7-7logo.jpg", bgvideo:"assets/cybertruck-bg-clip.mp4", desc:"HoodBoss closes out the Still 7 series with The Last 7. Seven tracks straight from the streets that raised him — raw, direct, unfiltered. The final chapter.", tracks:[["Cyber Truck","1:24","assets/previews/last7-01-cyber-truck.mp3"],["Disrespectful","2:02","assets/previews/last7-02-disrespectful.mp3"],["Stop","1:50","assets/previews/last7-03-stop.mp3"],["Wild Side","2:08","assets/previews/last7-04-wild-side.mp3"],["Fallen Soldiers Pt. 2","2:14","assets/previews/last7-05-fallen-soldiers-pt-2.mp3"],["On My Mind","2:04","assets/previews/last7-06-on-my-mind.mp3"],["Seen It All","1:23","assets/previews/last7-07-seen-it-all.mp3"]]},
+  beast:{title:"Beast Mode EP", meta:"3 tracks • May 1, 2026 • via EMPIRE", artist:"Cam Webbe", link:"https://buy.stripe.com/9B6cN77RP7cs1Hz34k1Jm04", front:"assets/beast-mode-cover.jpg", back:null, bgvideo:"assets/beastmode-bg-clip.mp4", desc:"Beast Mode EP via EMPIRE (May 1, 2026) — Beast Mode, Fuck the Streets, Folded.", tracks:[["Beast Mode","2:25","assets/previews/beast-01-beast-mode.mp3"],["Fuck the Streets","2:57","assets/previews/beast-02-fuck-the-streets.mp3"],["Folded","2:02","assets/previews/beast-03-folded.mp3"]]}
 };
-var current='still7', playingIdx=-1;
+var current=null, playingIdx=-1;
 var audio=document.getElementById('player');
-function renderTracks(){
-  var a=ALBUMS[current];
-  document.getElementById('albumMeta').textContent=a.meta;
-  document.getElementById('streamBtn').href=a.link;
-  document.getElementById('streamBtn').textContent='Buy '+a.title+' — $1 ↗';
-  var html='';
+function openDetail(key){
+  var a=ALBUMS[key]; if(!a) return;
+  current=key; playingIdx=-1; audio.pause();
+  document.getElementById('detailArtist').textContent=a.artist;
+  document.getElementById('detailTitle').textContent=a.title;
+  document.getElementById('detailMeta').textContent=a.meta;
+  document.getElementById('detailDesc').textContent=a.desc;
+  var covers=document.getElementById('detailCovers');
+  var html='<figure style="margin:0"><img src="'+a.front+'" alt="Front cover art for '+a.title+' by '+a.artist+'" /><figcaption>Front cover</figcaption></figure>';
+  if(a.back){ html+='<figure style="margin:0"><img src="'+a.back+'" alt="Back cover art for '+a.title+' by '+a.artist+'" /><figcaption>Back cover</figcaption></figure>'; covers.className='detail-covers'; }
+  else { covers.className='detail-covers single'; }
+  covers.innerHTML=html;
+  var buy=document.getElementById('detailBuy');
+  buy.href=a.link; buy.textContent='Buy '+a.title+' — $1 ↗';
+  document.getElementById('detailNow').textContent='Nothing playing yet — pick a track';
+  renderDetailTracks();
+  var bg=document.getElementById('detailBg'), scrim=document.getElementById('detailScrim');
+  if(a.bgvideo){ bg.src=a.bgvideo; bg.load(); bg.play().catch(function(){}); scrim.style.display='block'; }
+  else { bg.removeAttribute('src'); bg.load(); scrim.style.display='none'; }
+  document.getElementById('detail').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('detail').scrollTop=0;
+}
+function closeDetail(){
+  document.getElementById('detail').classList.remove('open');
+  document.body.style.overflow='';
+  audio.pause(); playingIdx=-1;
+  var bg=document.getElementById('detailBg');
+  bg.pause(); bg.removeAttribute('src'); bg.load();
+  document.getElementById('detailScrim').style.display='none';
+}
+function renderDetailTracks(){
+  if(!current) return;
+  var a=ALBUMS[current], html='';
   a.tracks.forEach(function(t,i){
     html+='<div class="track'+(i===playingIdx?' playing':'')+'" onclick="playTrack('+i+')"><span class="num">'+(i===playingIdx&&!audio.paused?'▶':(i+1))+'</span><b>'+t[0]+'</b><small>'+(t[1]||'')+'</small></div>';
   });
-  document.getElementById('trackList').innerHTML=html;
+  document.getElementById('detailTracks').innerHTML=html;
 }
 function playTrack(i){
+  if(!current) return;
   var a=ALBUMS[current], t=a.tracks[i];
-  if(playingIdx===i && !audio.paused){ audio.pause(); renderTracks(); return; }
+  if(playingIdx===i && !audio.paused){ audio.pause(); renderDetailTracks(); return; }
   playingIdx=i;
-  document.getElementById('nowTitle').textContent=t[0]+' — 30-second preview';
-  document.getElementById('nowArtist').textContent=a.artist+' • '+a.meta+' — tap Buy to own the EP for $1';
+  document.getElementById('detailNow').textContent=t[0]+' — 30-second preview • '+a.artist;
   audio.src=t[2];
   audio.play().catch(function(){});
-  renderTracks();
+  renderDetailTracks();
 }
-audio.addEventListener('timeupdate',function(){
-  if(audio.duration){ document.getElementById('prog').style.width=Math.min(100,audio.currentTime/audio.duration*100)+'%'; }
-});
 audio.addEventListener('ended',function(){
-  playingIdx=-1; document.getElementById('prog').style.width='0%'; renderTracks();
+  playingIdx=-1; document.getElementById('detailNow').textContent='Nothing playing yet — pick a track'; renderDetailTracks();
 });
-audio.addEventListener('pause',function(){ renderTracks(); });
-document.querySelectorAll('.tab').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('active')});
-    btn.classList.add('active'); current=btn.dataset.album; playingIdx=-1; audio.pause();
-    document.getElementById('nowTitle').textContent='Select a track';
-    document.getElementById('nowArtist').textContent=ALBUMS[current].artist+' — '+ALBUMS[current].meta;
-    document.getElementById('prog').style.width='0';
-    renderTracks();
-  });
-});
-renderTracks();
+audio.addEventListener('pause',function(){ renderDetailTracks(); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeDetail(); });
 </script>
 <script>
 /* PWA — service worker registration + install banner */
