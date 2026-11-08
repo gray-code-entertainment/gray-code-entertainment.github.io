@@ -431,7 +431,9 @@ function showStoreTab(id, btn){
   var tabs=document.querySelectorAll('.store-tab');
   for(var j=0;j<tabs.length;j++){ var active = tabs[j]===btn; tabs[j].classList.toggle('active', active); tabs[j].setAttribute('aria-selected', active ? 'true' : 'false'); }
 }
-function toggleMenu(btn){
+// Never Told: title follows the clicked product.
+  document.getElementById('tab-never-told').addEventListener('click',function(e){var c=e.target.closest('.product'),h=c&&c.querySelector('h3');if(h)document.title='Never Told / '+h.textContent.trim();});
+function toggleMenu(btn)
   var m=document.getElementById('mobileMenu');
   var open=m.classList.toggle('open');
   btn.setAttribute('aria-expanded',open?'true':'false');
