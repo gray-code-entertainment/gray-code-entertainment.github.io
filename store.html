@@ -21,12 +21,12 @@
 <!-- App cover image: the official GCE company logo -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://graycodeenterprise.net/store" />
-<meta property="og:title" content="Store — The Last 7 Tee $50 & Hoodie $75 & Never Told Hoodie $50 | Gray Code Entertainment" />
+<meta property="og:title" content="Store / Artist Merch" />
 <meta property="og:description" content="Shop The Last 7 merch: the HoodBoss tee ($50) and hoodie ($75) with the full cover art on the front and the tracklist on the back — plus the Never Told Hoodie ($50), a black Gildan Heavy Blend hoodie with white 'Never Told' lettering across the chest. Black, XS–3XL, pay on the spot." />
 <meta property="og:image" content="https://graycodeenterprise.net/assets/last7-tshirt-front.png" />
 <meta property="og:image:alt" content="The Last 7 T-Shirt — black tee with the full Last 7 cover art on the chest" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Store — The Last 7 Tee $50 & Hoodie $75 & Never Told Hoodie $50 | Gray Code Entertainment" />
+<meta name="twitter:title" content="Store / Artist Merch" />
 <meta name="twitter:description" content="Shop The Last 7 merch: the HoodBoss tee ($50) and hoodie ($75) with the full cover art on the front and the tracklist on the back — plus the Never Told Hoodie ($50), a black Gildan Heavy Blend hoodie with white 'Never Told' lettering across the chest. Black, XS–3XL, pay on the spot." />
 <meta name="twitter:image" content="https://graycodeenterprise.net/assets/last7-tshirt-front.png" />
 <meta name="twitter:image:alt" content="The Last 7 T-Shirt — black tee with the full Last 7 cover art on the chest" />
@@ -88,7 +88,7 @@
   ]
 }
 </script>
-<title>Store — The Last 7 Tee $50 & Hoodie $75 & Never Told Hoodie $50 | Gray Code Entertainment</title>
+<title>Store / Artist Merch</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -277,8 +277,8 @@
     <p class="lead">Artist merch — The Last 7 tee and hoodie from HoodBoss, plus the Never Told Hoodie. Use the tabs below to browse each collection. Tap Buy Now to pay on the spot.</p>
 
     <div class="store-tabs" role="tablist" aria-label="Merch categories">
-      <button class="store-tab active" type="button" role="tab" id="tab-btn-artist-merch" aria-selected="true" aria-controls="tab-artist-merch" onclick="showStoreTab('artist-merch', this)">Artist Merch</button>
-      <button class="store-tab" type="button" role="tab" id="tab-btn-never-told" aria-selected="false" aria-controls="tab-never-told" onclick="showStoreTab('never-told', this)">Never Told</button>
+      <button class="store-tab active" type="button" role="tab" id="tab-btn-artist-merch" aria-selected="true" aria-controls="tab-artist-merch" onclick="showStoreTab('artist-merch', this)">Store / Artist Merch</button>
+      <button class="store-tab" type="button" role="tab" id="tab-btn-never-told" aria-selected="false" aria-controls="tab-never-told" onclick="showStoreTab('never-told', this)">Store / Never Told</button>
     </div>
 
     <div id="tab-artist-merch" class="store-panel" role="tabpanel" aria-labelledby="tab-btn-artist-merch">
@@ -424,6 +424,8 @@ if ('serviceWorker' in navigator) {
 </script>
 <script>
 function showStoreTab(id, btn){
+  var name = id === 'never-told' ? 'Never Told' : 'Artist Merch';
+  document.title = 'Store / ' + name;
   var panels=document.querySelectorAll('.store-panel');
   for(var i=0;i<panels.length;i++){ panels[i].hidden = (panels[i].id !== 'tab-'+id); }
   var tabs=document.querySelectorAll('.store-tab');
