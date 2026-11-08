@@ -433,7 +433,7 @@ function showStoreTab(id, btn){
 }
 // Never Told: title follows the clicked product.
   document.getElementById('tab-never-told').addEventListener('click',function(e){var c=e.target.closest('.product'),h=c&&c.querySelector('h3');if(h)document.title='Never Told / '+h.textContent.trim();});
-function toggleMenu(btn)
+function toggleMenu(btn){
   var m=document.getElementById('mobileMenu');
   var open=m.classList.toggle('open');
   btn.setAttribute('aria-expanded',open?'true':'false');
