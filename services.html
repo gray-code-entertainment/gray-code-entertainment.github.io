@@ -160,6 +160,11 @@
   .product-body p{color:var(--muted)}
   .price{font-family:"Anton";font-size:26px;letter-spacing:.03em;color:var(--gold);margin:10px 0 0}
   /* Services */
+  #services{position:relative;overflow:hidden}
+  #services video.svc-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+  #services .svc-overlay{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.38) 50%, rgba(0,0,0,.62));pointer-events:none}
+  #services .wrap{position:relative;z-index:1}
+  #services h2{color:#fff}
   .svc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
   @media(max-width:900px){.svc{grid-template-columns:1fr 1fr}} @media(max-width:520px){.svc{grid-template-columns:1fr}}
   .svc-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
@@ -218,7 +223,10 @@
 
 <main id="top">
 <!-- SERVICES -->
-  <section id="services" style="padding-top:0"><div class="wrap">
+  <section id="services" style="padding-top:0">
+    <video class="svc-bg" src="assets/gce-sizzle-v3-bg.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <div class="svc-overlay" aria-hidden="true"></div>
+    <div class="wrap">
     <div class="label">What We Do</div>
     <h2>Services</h2>
     <div class="svc">
