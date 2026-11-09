@@ -18,14 +18,14 @@
 <!-- App cover image: the official GCE company logo -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Music — Gray Code Entertainment" />
-<meta property="og:description" content="Buy direct — HoodBoss's Still 7, Still 7 Pt. 2, and The Last 7, plus Cam Webbe's Beast Mode EP. Own the full EP for $1." />
+<meta property="og:description" content="Buy direct — HoodBoss's Still 7, Still 7 Pt. 2, and The Last 7. Own the full EP for $1. Cam Webbe's Beast Mode EP streams on Spotify, Apple Music, and Deezer." />
 <meta property="og:image" content="assets/gce-company-logo.jpg" />
 <meta property="og:image:width" content="1170" />
 <meta property="og:image:height" content="1094" />
 <meta property="og:image:alt" content="Gray Code Enterprise logo — winged figure with CODE ENTERPRISE text" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Music — Gray Code Entertainment" />
-<meta name="twitter:description" content="Buy direct — HoodBoss's Still 7, Still 7 Pt. 2, and The Last 7, plus Cam Webbe's Beast Mode EP. Own the full EP for $1." />
+<meta name="twitter:description" content="Buy direct — HoodBoss's Still 7, Still 7 Pt. 2, and The Last 7. Own the full EP for $1. Cam Webbe's Beast Mode EP streams on Spotify, Apple Music, and Deezer." />
 <meta name="twitter:image" content="assets/gce-company-logo.jpg" />
 <meta name="twitter:image:alt" content="Gray Code Enterprise logo — winged figure with CODE ENTERPRISE text" />
 <title>Music — Gray Code Entertainment</title>
@@ -107,6 +107,7 @@
   .track.playing .num{background:var(--gold);color:#111;border-color:var(--gold)}
   .track b{flex:1} .track small{color:var(--muted)}
   .detail-buy{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
+  .detail-stream{display:none;flex-wrap:wrap;gap:12px}
   .detail-now{font-size:13px;color:var(--muted);font-weight:700}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:800;text-decoration:none;font-size:15px;border:1px solid transparent;cursor:pointer}
   .btn-gold{background:var(--gold);color:#111}
@@ -149,10 +150,10 @@
   <section id="music" style="padding-top:0"><div class="wrap">
     <div class="label">Buy Direct</div>
     <h2>Latest Music</h2>
-    <p class="lead">Out now — HoodBoss's Still 7, Still 7 Pt. 2, and The Last 7, plus Cam Webbe's Beast Mode EP. Own the full EP for $1 — includes both the explicit and clean versions, emailed to you after checkout.</p>
+    <p class="lead">Out now — HoodBoss's Still 7, Still 7 Pt. 2, and The Last 7. Own the full EP for $1 — includes both the explicit and clean versions, emailed to you after checkout. Cam Webbe's Beast Mode EP streams on Spotify, Apple Music, and Deezer.</p>
         <p class="lead">Why a dollar? Straight from the artist — no streaming service taking a cut. No other artist is selling their full album for a dollar. You buy it here, you own it.</p>
     <p class="lead">After checkout, your download link is emailed to you from bookgce@gmail.com, usually within 15 minutes. One ZIP with the full EP — clean and explicit versions, cover art, and tracklist.</p><p class="lead">Cam Webbe's Motion EP is still on the way — find it under Coming Soon.</p>
-    <p style="color:var(--muted);font-size:14px;margin:18px 0 0">Tap a cover to open the EP — big front and back art, the story, every track with a 30-second preview, and the $1 buy button.</p>
+    <p style="color:var(--muted);font-size:14px;margin:18px 0 0">Tap a cover to open the EP — big front and back art, the story, every track with a 30-second preview, and the $1 buy button on the HoodBoss EPs.</p>
 
     <div class="ep-grid">
       <a class="ep-card" href="/music/still-7" style="display:block;text-decoration:none">
@@ -214,7 +215,7 @@
           <div id="detailTracks"></div>
         </div>
         <div class="detail-buy">
-          <a class="btn btn-gold" id="detailBuy" href="#" target="_blank" rel="noopener">Buy — $1 ↗</a>
+          <a class="btn btn-gold" id="detailBuy" href="#" target="_blank" rel="noopener">Buy — $1 ↗</a><span class="detail-stream" id="detailStream" style="display:none"></span>
           <span class="detail-now" id="detailNow">Nothing playing yet — pick a track</span>
         </div>
       </div>
@@ -241,7 +242,7 @@ var ALBUMS = {
   still7:{title:"Still 7", meta:"7 tracks • Feb 19, 2021", artist:"HoodBoss", link:"https://buy.stripe.com/6oUbJ3dc9gN2bi9cEU1Jm02", front:"assets/still7-cover.jpg", back:"assets/still7-cover-back.jpg", bgvideo:"assets/gucciprint-bg-clip.mp4", desc:"HoodBoss's debut project. Released Feb 19, 2021.", tracks:[["The Intro","1:13","assets/previews/still7-01-the-intro.mp3"],["Money Man","2:21","assets/previews/still7-02-money-man.mp3"],["Gucci Print x Off White ft. G. Vinci","2:10","assets/previews/still7-03-gucci-print.mp3"],["Purple World","2:18","assets/previews/still7-04-purple-world.mp3"],["Fly High ft. DOT","2:35","assets/previews/still7-05-fly-high.mp3"],["Ride with Me ft. Priv","2:56","assets/previews/still7-06-ride-with-me.mp3"],["Y.O.U ft. Jay Blick","3:10","assets/previews/still7-07-y-o-u.mp3"]]},
   still7pt2:{title:"Still 7 Pt. 2", meta:"7 tracks • Apr 20, 2024", artist:"HoodBoss", link:"https://buy.stripe.com/14A4gBegdcwMgCtdIY1Jm03", front:"assets/still7-pt2-cover.jpg", back:null, bgvideo:"assets/standonbusiness-bg-clip.mp4", desc:"The follow-up to Still 7. Released Apr 20, 2024.", tracks:[["Stand On Business","1:56","assets/previews/pt2-01-stand-on-business.mp3"],["Hood Dreams","2:00","assets/previews/pt2-02-hood-dreams.mp3"],["No Love","1:48","assets/previews/pt2-03-no-love.mp3"],["Izm","1:26","assets/previews/pt2-04-izm.mp3"],["Demon Time","1:19","assets/previews/pt2-05-demon-time.mp3"],["Spaceships","2:08","assets/previews/pt2-06-spaceships.mp3"],["Outta Line","1:25","assets/previews/pt2-07-outta-line.mp3"]]},
   last7:{title:"The Last 7", meta:"7 tracks • Nov 7, 2026", artist:"HoodBoss", link:"https://buy.stripe.com/14AcN7egd40gbi9bAQ1Jm05", front:"assets/hoodboss-last7.jpg", back:"assets/Hoodboss-The-Last-7-back-cover-v7-7logo.jpg", bgvideo:"assets/cybertruck-bg-clip.mp4", desc:"HoodBoss closes out the Still 7 series with The Last 7. Seven tracks straight from the streets that raised him — raw, direct, unfiltered. The final chapter.", tracks:[["Cyber Truck","1:24","assets/previews/last7-01-cyber-truck.mp3"],["Disrespectful","2:02","assets/previews/last7-02-disrespectful.mp3"],["Stop","1:50","assets/previews/last7-03-stop.mp3"],["Wild Side","2:08","assets/previews/last7-04-wild-side.mp3"],["Fallen Soldiers Pt. 2","2:14","assets/previews/last7-05-fallen-soldiers-pt-2.mp3"],["On My Mind","2:04","assets/previews/last7-06-on-my-mind.mp3"],["Seen It All","1:23","assets/previews/last7-07-seen-it-all.mp3"]]},
-  beast:{title:"Beast Mode EP", meta:"3 tracks • May 1, 2026 • via EMPIRE", artist:"Cam Webbe", link:"https://buy.stripe.com/9B6cN77RP7cs1Hz34k1Jm04", front:"assets/beast-mode-cover.jpg", back:null, bgvideo:"assets/beastmode-bg-clip.mp4", desc:"Beast Mode EP via EMPIRE (May 1, 2026) — Beast Mode, Fuck the Streets, Folded.", tracks:[["Beast Mode","2:25","assets/previews/beast-01-beast-mode.mp3"],["Fuck the Streets","2:57","assets/previews/beast-02-fuck-the-streets.mp3"],["Folded","2:02","assets/previews/beast-03-folded.mp3"]]}
+  beast:{title:"Beast Mode EP", meta:"3 tracks • May 1, 2026 • via EMPIRE", artist:"Cam Webbe", stream:[["Spotify","https://open.spotify.com/artist/6bRzREconywJGY4zOBzjYQ"],["Apple Music","https://music.apple.com/us/artist/cam-webbe/1470174986"],["Deezer","https://www.deezer.com/artist/68380092"]], front:"assets/beast-mode-cover.jpg", back:null, bgvideo:"assets/beastmode-bg-clip.mp4", desc:"Beast Mode EP via EMPIRE (May 1, 2026) — Beast Mode, Fuck the Streets, Folded.", tracks:[["Beast Mode","2:25","assets/previews/beast-01-beast-mode.mp3"],["Fuck the Streets","2:57","assets/previews/beast-02-fuck-the-streets.mp3"],["Folded","2:02","assets/previews/beast-03-folded.mp3"]]}
 };
 var current=null, playingIdx=-1;
 var audio=document.getElementById('player');
@@ -258,7 +259,14 @@ function openDetail(key){
   else { covers.className='detail-covers single'; }
   covers.innerHTML=html;
   var buy=document.getElementById('detailBuy');
-  buy.href=a.link; buy.textContent='Buy '+a.title+' — $1 ↗';
+  var streamBox=document.getElementById('detailStream');
+  if(a.stream){
+    buy.style.display='none'; streamBox.style.display='flex';
+    streamBox.innerHTML=a.stream.map(function(s){return '<a class="btn btn-gold" href="'+s[1]+'" target="_blank" rel="noopener">Stream on '+s[0]+' ↗</a>';}).join('');
+  } else {
+    buy.style.display=''; streamBox.style.display='none';
+    buy.href=a.link; buy.textContent='Buy '+a.title+' — $1 ↗';
+  }
   document.getElementById('detailNow').textContent='Nothing playing yet — pick a track';
   renderDetailTracks();
   var bg=document.getElementById('detailBg'), scrim=document.getElementById('detailScrim');
