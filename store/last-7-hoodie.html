@@ -102,6 +102,13 @@ section{padding:72px 0}
 footer{border-top:1px solid var(--line);padding:36px 0 90px;color:var(--muted);font-size:14px}
 .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 </style>
+<style>
+.detail-covers img,.size-fit img{cursor:zoom-in}
+#gce-lightbox{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.92);padding:16px;cursor:zoom-out}
+#gce-lightbox.open{display:flex}
+#gce-lightbox img{max-width:min(94vw,900px);max-height:92vh;width:auto;height:auto;object-fit:contain;border-radius:12px;cursor:default}
+#gce-lightbox .lb-close{position:fixed;top:14px;right:16px;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.35);width:44px;height:44px;border-radius:50%;font-size:24px;line-height:1;cursor:pointer}
+</style>
 </head>
 <body>
 <header class="nav"><div class="nav-in">
@@ -232,6 +239,20 @@ var open=m.classList.toggle('open');
 btn.setAttribute('aria-expanded',open?'true':'false');
 btn.textContent=open?'×':'☰';
 }
+</script>
+<div id="gce-lightbox" role="dialog" aria-label="Enlarged product photo"><button class="lb-close" type="button" aria-label="Close">&times;</button><img alt="" /></div>
+<script>
+(function(){
+var lb=document.getElementById('gce-lightbox');if(!lb)return;
+var img=lb.querySelector('img');
+function openLb(src,alt){img.src=src;img.alt=alt||'';lb.classList.add('open');document.body.style.overflow='hidden';}
+function closeLb(){lb.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('.detail-covers img,.size-fit img').forEach(function(el){
+el.addEventListener('click',function(){openLb(el.currentSrc||el.src,el.alt);});
+});
+lb.addEventListener('click',function(e){if(e.target===lb||e.target.classList.contains('lb-close'))closeLb();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+})();
 </script>
 </body>
 </html>
