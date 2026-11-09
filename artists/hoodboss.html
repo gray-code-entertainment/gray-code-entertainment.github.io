@@ -209,6 +209,13 @@
 
   footer{border-top:1px solid var(--line);padding:36px 0 90px;color:var(--muted);font-size:14px}
   .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+  /* Press kit: clickable + animated social icons */
+  .presskit-wrap{position:relative;max-width:640px}
+  .presskit-wrap img{width:100%;border-radius:20px;border:1px solid var(--line);display:block;cursor:zoom-in}
+  .pk-hot{position:absolute;display:block;z-index:2}
+  .pk-pulse{position:absolute;width:3.4%;aspect-ratio:1/1;border:2px solid #fff;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1;animation:pkpulse 1.8s ease-out infinite;box-shadow:0 0 12px rgba(255,255,255,.7)}
+  @keyframes pkpulse{0%{transform:translate(-50%,-50%) scale(.7);opacity:.95}70%{transform:translate(-50%,-50%) scale(1.6);opacity:0}100%{transform:translate(-50%,-50%) scale(1.6);opacity:0}}
 </style>
 </head>
 <body>
@@ -252,8 +259,16 @@
 
     <h2 style="margin-top:48px">Press Kit</h2>
     <p class="lead">The official HoodBoss press kit &mdash; bio, sound &amp; style, releases, socials, and booking, all in one sheet.</p>
-    <a href="../assets/hoodboss-press-kit.jpg" target="_blank" rel="noopener"><img src="../assets/hoodboss-press-kit.jpg" alt="HoodBoss official press kit — bio, sound and style, releases, socials, and booking" style="width:100%;max-width:640px;border-radius:20px;border:1px solid var(--line);display:block" /></a>
-    <p style="color:var(--muted);font-size:14px;margin-top:12px">Tap the image to open the full-size press kit.</p>
+<div class="presskit-wrap">
+  <img src="../assets/hoodboss-press-kit.jpg" alt="HoodBoss official press kit — bio, sound and style, releases, socials, and booking" onclick="window.open('../assets/hoodboss-press-kit.jpg','_blank')" />
+  <a class="pk-hot" href="https://www.instagram.com/iamhbee__" target="_blank" rel="noopener" aria-label="HoodBoss on Instagram" style="left:25%;top:80.6%;width:25%;height:2%"></a>
+  <a class="pk-hot" href="https://www.tiktok.com/@iamhb__" target="_blank" rel="noopener" aria-label="HoodBoss on TikTok" style="left:25%;top:83.0%;width:25%;height:2%"></a>
+  <a class="pk-hot" href="https://www.youtube.com/@gasdogz" target="_blank" rel="noopener" aria-label="HoodBoss on YouTube" style="left:25%;top:85.2%;width:25%;height:2%"></a>
+  <span class="pk-pulse" style="left:27.9%;top:81.6%"></span>
+  <span class="pk-pulse" style="left:27.9%;top:84.0%;animation-delay:.3s"></span>
+  <span class="pk-pulse" style="left:27.8%;top:86.2%;animation-delay:.6s"></span>
+</div>
+    <p style="color:var(--muted);font-size:14px;margin-top:12px">Tap the pulsing social icons to visit each page &mdash; tap anywhere else on the image to open the full-size press kit.</p>
 
     <h2 style="margin-top:48px">Sound &amp; Style</h2>
     <div class="svc">
