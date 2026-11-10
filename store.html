@@ -172,6 +172,10 @@
   /* Store category tabs — big tap targets for phones */
   .product img.portrait{aspect-ratio:4/5;object-fit:cover;object-position:center 22%}
   .product img.landscape{aspect-ratio:3/2;object-fit:cover}
+  /* Artist Merch categories side by side on the storefront (Nov 9) */
+  .am-cats{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
+  .am-cats .store-grid{grid-template-columns:1fr}
+  @media(max-width:820px){.am-cats{grid-template-columns:1fr}}
   /* Services */
   .svc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
   @media(max-width:900px){.svc{grid-template-columns:1fr 1fr}} @media(max-width:520px){.svc{grid-template-columns:1fr}}
@@ -218,6 +222,8 @@
   .cat-link:hover .cat-arrow{transform:translateX(6px)}
   .back-link{display:inline-block;margin:6px 0 4px;font-weight:800;color:var(--gold);text-decoration:none}
   .back-link:hover{text-decoration:underline}
+  .more-btn{display:inline-block;background:var(--gold);color:#111!important;font-weight:800;padding:10px 22px;border-radius:999px;text-decoration:none}
+  .more-btn:hover{opacity:.9}
 </style>
 </head>
 <body>
@@ -246,9 +252,10 @@
     <div class="label">Store</div>
     <h2>Store</h2>
     <p class="lead">Artist merch — The Last 7 tee and hoodie from HoodBoss, plus the Never Told Hoodie, the Never Told denim set, 17 Never Told tees at $30 each, and 16 more Never Told pieces — hoodies, crews, quarter-zips, sweatpants, jeans, and the plaid track jacket. Tap a category to open it and see all the products in it.</p>
-    <p style="margin:0 0 8px"><a class="more-btn" href="/store/all-products">View All Products &rarr;</a></p>
+    <p style="margin:0 0 8px"><a class="back-link" href="/store/all-products">View All Products &rarr;</a></p>
     <h2 class="store-cat" style="margin-top:40px"><a href="/store/artist-merch" style="text-decoration:none;color:inherit">Artist Merch</a></h2>
-<p><a class="back-link" href="/store">&larr; Back to Store</a></p>
+<div class="am-cats">
+  <div>
     <a class="cat-link" href="/store/artist-merch/t-shirts"><span class="cat-link-txt"><span class="cat-link-name">T-Shirts <span class="cat-count">1 item</span></span></span><span class="cat-arrow">&rarr;</span></a>
     <div class="store-grid">
       <a href="/store/last-7-t-shirt" style="display:block;text-decoration:none"><article class="product"><figure><img src="assets/last7-tshirt-front.png" alt="The Last 7 T-Shirt, front — black tee with the full Last 7 cover art on the chest" />
@@ -266,6 +273,8 @@
         </div>
       </article></a>
     </div>
+  </div>
+  <div>
     <a class="cat-link" href="/store/artist-merch/hoodies"><span class="cat-link-txt"><span class="cat-link-name">Hoodies <span class="cat-count">1 item</span></span></span><span class="cat-arrow">&rarr;</span></a>
     <div class="store-grid">
       <a href="/store/last-7-hoodie" style="display:block;text-decoration:none"><article class="product"><figure><img src="assets/last7-hoodie-front.png" alt="The Last 7 Hoodie, front — black hoodie with the full Last 7 cover art on the chest" />
@@ -283,8 +292,9 @@
         </div>
       </article></a>
     </div>
+  </div>
+</div>
     <h2 class="store-cat" style="margin-top:40px"><a href="/store/never-told" style="text-decoration:none;color:inherit">Never Told</a></h2>
-<p><a class="back-link" href="/store">&larr; Back to Store</a></p>
     <a class="cat-link" href="/store/never-told/t-shirts"><span class="cat-link-txt"><span class="cat-link-name">T-Shirts <span class="cat-count">17 items</span></span></span><span class="cat-arrow">&rarr;</span></a>
     <div class="store-grid">
       <a href="/store/never-told-wide-eyed-faces-tee" style="display:block;text-decoration:none"><article class="product"><figure><img src="assets/never-told-wide-eyed-faces-tee-front.jpg" alt="Wide-Eyed Faces Tee, front — dark gray tee with three wide-eyed Never Told character faces across the chest" />
