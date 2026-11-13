@@ -107,6 +107,7 @@
     <a class="nav-cta" href="../booking.html">Book an Artist</a>
   </nav>
   <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
+  <button class="gce-cart-btn" id="gceCartBtn" type="button" aria-label="View cart">🛒<span class="gce-cart-count" id="gceCartCount" hidden>0</span></button>
 </div>
 <div class="mobile-menu" id="mobileMenu">
   <a href="../index.html">Home</a>
@@ -245,5 +246,6 @@ function toggleMenu(btn){
   btn.textContent=open?'×':'☰';
 }
 </script>
+<script src="/assets/cart.js" defer></script>
 </body>
 </html>
