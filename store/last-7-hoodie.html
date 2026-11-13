@@ -118,6 +118,7 @@ footer{border-top:1px solid var(--line);padding:36px 0 90px;color:var(--muted);f
 <a class="nav-cta" href="../booking.html">Book an Artist</a>
 </nav>
 <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
+<button class="gce-cart-btn" id="gceCartBtn" type="button" aria-label="View cart">🛒<span class="gce-cart-count" id="gceCartCount" hidden>0</span></button>
 </div>
 <div class="mobile-menu" id="mobileMenu">
 <a href="../index.html">Home</a>
@@ -147,6 +148,14 @@ footer{border-top:1px solid var(--line);padding:36px 0 90px;color:var(--muted);f
 <p class="desc">Black Unisex Mainstreet Heavyweight Hooded Sweatshirt — oversized fit, drop shoulder, 12.5 oz. Front: the full Last 7 cover art. Back: the title in the cover lettering with all seven tracks, printed big across the back.</p>
 <div class="detail-buy">
 <a class="btn btn-gold" href="https://buy.stripe.com/28E7sN6NLfIYdqh8oE1Jm01" target="_blank" rel="noopener">Buy Now →</a>
+<div class="gce-buy-row" data-product-section data-product="last7-hoodie" data-name="The Last 7 Hoodie" data-price-cents="7500" data-price-id="price_1UYuG5PPjEaGGXHQbtoPcu2f" data-image="/assets/last7-hoodie-front.png">
+<p class="gce-size-label">Pick a size:</p>
+<div class="gce-size-picker" role="group" aria-label="Size">
+<button type="button" data-size="XS">XS</button><button type="button" data-size="S">S</button><button type="button" data-size="M">M</button><button type="button" data-size="L">L</button><button type="button" data-size="XL">XL</button><button type="button" data-size="2XL">2XL</button><button type="button" data-size="3XL">3XL</button>
+</div>
+<p class="gce-size-hint" hidden>Pick a size first</p>
+<button class="btn gce-add-to-cart" type="button">Add to Cart</button>
+</div>
 </div>
 <div class="size-guide">
 <div class="size-tee-layout"><div class="size-tee-table"><h3>Last 7 Hoodie — Independent Trading Co. IND420XD Mainstreet Heavyweight</h3>
@@ -254,5 +263,6 @@ lb.addEventListener('click',function(e){if(e.target===lb||e.target.classList.con
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
 })();
 </script>
+<script src="/assets/cart.js" defer></script>
 </body>
 </html>

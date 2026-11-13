@@ -230,6 +230,7 @@
     <a class="nav-cta" href="/booking">Book an Artist</a>
   </nav>
   <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
+  <button class="gce-cart-btn" id="gceCartBtn" type="button" aria-label="View cart">🛒<span class="gce-cart-count" id="gceCartCount" hidden>0</span></button>
 </div>
 <div class="mobile-menu" id="mobileMenu">
   <a href="/">Home</a>
@@ -366,5 +367,6 @@ function toggleMenu(btn){
   btn.setAttribute('aria-expanded',open?'true':'false');
   btn.textContent=open?'×':'☰';
 }
+<script src="/assets/cart.js" defer></script>
 </script>   </body>
 </html>
