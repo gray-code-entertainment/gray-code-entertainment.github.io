@@ -44,6 +44,9 @@ var CHECKOUT_WEBHOOK_URL = "";
   /* ---------- styles (injected so no page CSS needs editing) ---------- */
 
   var CSS = [
+    /* NOTE: elements below use display:flex / display:grid, which would
+       override the UA [hidden] rule — so hidden must win explicitly. */
+    ".gce-cart-drawer[hidden],.gce-cart-overlay[hidden],.gce-cart-count[hidden]{display:none!important}",
     /* keep the header layout as it is: links hug the right on desktop, */
     /* hamburger + cart hug the right on phones */
     ".nav-in .links{margin-left:auto}",
