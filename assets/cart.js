@@ -11,7 +11,7 @@
    Checkout button shows a "coming right up" message and the
    cart keeps working — nothing breaks.
    ============================================================ */
-var CHECKOUT_WEBHOOK_URL = "";
+var CHECKOUT_WEBHOOK_URL = "https://hook.us2.make.com/9g453ijur8psesoo6r18rnvflf4i3ma9";
 
 (function () {
   "use strict";
