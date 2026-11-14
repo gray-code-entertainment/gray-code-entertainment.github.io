@@ -14,6 +14,14 @@
   p { color: #555; line-height: 1.5; }
   a.checkout-link { display: inline-block; margin-top: 20px; background: #c9a227; color: #111; font-weight: 700; text-decoration: none; padding: 12px 24px; border-radius: 6px; }
   a.checkout-link:hover { background: #d9b73a; }
+  #order-summary { margin-top: 28px; text-align: left; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+  #order-summary h2 { font-size: 18px; margin: 0 0 12px; }
+  .summary-item { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #eee; }
+  .summary-item:first-of-type { border-top: 0; }
+  .summary-item .item-name { font-weight: 700; color: #111; }
+  .summary-item .item-detail { color: #555; font-size: 14px; }
+  .summary-item .item-total { font-weight: 700; color: #111; white-space: nowrap; }
+  .summary-total { display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; margin-top: 8px; border-top: 2px solid #111; font-weight: 800; font-size: 18px; color: #111; }
 </style>
 </head>
 <body>
@@ -21,6 +29,11 @@
 <main>
   <h1>Taking you to checkout...</h1>
   <p id="status-line"></p>
+  <section id="order-summary" aria-label="Order summary" hidden>
+    <h2>Order summary</h2>
+    <div id="summary-items"></div>
+    <div class="summary-total"><span>Subtotal</span><span id="summary-subtotal"></span></div>
+  </section>
   <p>If you are not redirected automatically, tap the button below.</p>
   <a class="checkout-link" id="manual-link" href="/store">Continue to checkout</a>
   <noscript><p><a href="/store">Continue to the store</a></p></noscript>
@@ -38,26 +51,27 @@
   // NOTE: Meta's products param carries no size, so size is sent empty.
   // The payload shape otherwise matches the site cart exactly.
   // Meta's catalog uses one variant ID per size (item_group_id is the base
-  // product). Each variant maps to its base product + that size; the size
-  // also goes into the name so it shows on the Stripe checkout line item.
+  // product). Each variant maps to its base product + that size. Names use
+  // the EXACT catalog item titles ("The Last 7 T-Shirt - M"), which is what
+  // Meta's checkout validation checks against — never the "(Size M)" form.
   // Base IDs (no size) still work exactly as before.
   var PRODUCTS = {
-    "last7-tee":       { product: "last7-tee",    name: "The Last 7 T-Shirt",            price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "" },
-    "last7-tee-xs":    { product: "last7-tee",    name: "The Last 7 T-Shirt (Size XS)",  price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "XS" },
-    "last7-tee-s":     { product: "last7-tee",    name: "The Last 7 T-Shirt (Size S)",   price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "S" },
-    "last7-tee-m":     { product: "last7-tee",    name: "The Last 7 T-Shirt (Size M)",   price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "M" },
-    "last7-tee-l":     { product: "last7-tee",    name: "The Last 7 T-Shirt (Size L)",   price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "L" },
-    "last7-tee-xl":    { product: "last7-tee",    name: "The Last 7 T-Shirt (Size XL)",  price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "XL" },
-    "last7-tee-2xl":   { product: "last7-tee",    name: "The Last 7 T-Shirt (Size 2XL)", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "2XL" },
-    "last7-tee-3xl":   { product: "last7-tee",    name: "The Last 7 T-Shirt (Size 3XL)", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "3XL" },
-    "last7-hoodie":    { product: "last7-hoodie", name: "The Last 7 Hoodie",             price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "" },
-    "last7-hoodie-xs": { product: "last7-hoodie", name: "The Last 7 Hoodie (Size XS)",   price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "XS" },
-    "last7-hoodie-s":  { product: "last7-hoodie", name: "The Last 7 Hoodie (Size S)",    price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "S" },
-    "last7-hoodie-m":  { product: "last7-hoodie", name: "The Last 7 Hoodie (Size M)",    price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "M" },
-    "last7-hoodie-l":  { product: "last7-hoodie", name: "The Last 7 Hoodie (Size L)",    price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "L" },
-    "last7-hoodie-xl": { product: "last7-hoodie", name: "The Last 7 Hoodie (Size XL)",   price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "XL" },
-    "last7-hoodie-2xl": { product: "last7-hoodie", name: "The Last 7 Hoodie (Size 2XL)", price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "2XL" },
-    "last7-hoodie-3xl": { product: "last7-hoodie", name: "The Last 7 Hoodie (Size 3XL)", price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "3XL" }
+    "last7-tee":       { product: "last7-tee",    name: "The Last 7 T-Shirt",      price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", price_cents: 5000, size: "" },
+    "last7-tee-xs":    { product: "last7-tee",    name: "The Last 7 T-Shirt - XS", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", price_cents: 5000, size: "XS" },
+    "last7-tee-s":     { product: "last7-tee",    name: "The Last 7 T-Shirt - S",  price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", price_cents: 5000, size: "S" },
+    "last7-tee-m":     { product: "last7-tee",    name: "The Last 7 T-Shirt - M",  price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", price_cents: 5000, size: "M" },
+    "last7-tee-l":     { product: "last7-tee",    name: "The Last 7 T-Shirt - L",  price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", price_cents: 5000, size: "L" },
+    "last7-tee-xl":    { product: "last7-tee",    name: "The Last 7 T-Shirt - XL", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", price_cents: 5000, size: "XL" },
+    "last7-tee-2xl":   { product: "last7-tee",    name: "The Last 7 T-Shirt - 2XL", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", price_cents: 5000, size: "2XL" },
+    "last7-tee-3xl":   { product: "last7-tee",    name: "The Last 7 T-Shirt - 3XL", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", price_cents: 5000, size: "3XL" },
+    "last7-hoodie":    { product: "last7-hoodie", name: "The Last 7 Hoodie",       price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", price_cents: 7500, size: "" },
+    "last7-hoodie-xs": { product: "last7-hoodie", name: "The Last 7 Hoodie - XS",  price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", price_cents: 7500, size: "XS" },
+    "last7-hoodie-s":  { product: "last7-hoodie", name: "The Last 7 Hoodie - S",   price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", price_cents: 7500, size: "S" },
+    "last7-hoodie-m":  { product: "last7-hoodie", name: "The Last 7 Hoodie - M",   price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", price_cents: 7500, size: "M" },
+    "last7-hoodie-l":  { product: "last7-hoodie", name: "The Last 7 Hoodie - L",   price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", price_cents: 7500, size: "L" },
+    "last7-hoodie-xl": { product: "last7-hoodie", name: "The Last 7 Hoodie - XL",  price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", price_cents: 7500, size: "XL" },
+    "last7-hoodie-2xl": { product: "last7-hoodie", name: "The Last 7 Hoodie - 2XL", price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", price_cents: 7500, size: "2XL" },
+    "last7-hoodie-3xl": { product: "last7-hoodie", name: "The Last 7 Hoodie - 3XL", price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", price_cents: 7500, size: "3XL" }
   };
   var FALLBACK = "/store";
   var link = document.getElementById("manual-link");
@@ -79,12 +93,47 @@
       if (byId[id]) { byId[id].quantity += qty; }
       else {
         byId[id] = { product: PRODUCTS[id].product, price_id: PRODUCTS[id].price_id,
-                     name: PRODUCTS[id].name, size: PRODUCTS[id].size, quantity: qty };
+                     name: PRODUCTS[id].name, size: PRODUCTS[id].size,
+                     price_cents: PRODUCTS[id].price_cents, quantity: qty };
         items.push(byId[id]);
       }
     });
   } catch (e) { items = []; }
   if (items.length === 0) { goToStore(); return; }
+  // Render the order summary on the page itself, BEFORE the webhook call,
+  // so the items, quantities and subtotal are visible here (Meta's checkout
+  // validation reads this page, not just the Stripe session it redirects to).
+  (function renderSummary() {
+    var section = document.getElementById("order-summary");
+    var list = document.getElementById("summary-items");
+    var subtotalEl = document.getElementById("summary-subtotal");
+    if (!section || !list || !subtotalEl) return;
+    function money(cents) { return "$" + (cents / 100).toFixed(2); }
+    var subtotal = 0;
+    items.forEach(function (item) {
+      var lineTotal = item.price_cents * item.quantity;
+      subtotal += lineTotal;
+      var row = document.createElement("div");
+      row.className = "summary-item";
+      var left = document.createElement("div");
+      var nameEl = document.createElement("div");
+      nameEl.className = "item-name";
+      nameEl.textContent = item.name;
+      var detailEl = document.createElement("div");
+      detailEl.className = "item-detail";
+      detailEl.textContent = "Quantity: " + item.quantity + " \u00d7 " + money(item.price_cents) + " each";
+      left.appendChild(nameEl);
+      left.appendChild(detailEl);
+      var totalEl = document.createElement("div");
+      totalEl.className = "item-total";
+      totalEl.textContent = money(lineTotal);
+      row.appendChild(left);
+      row.appendChild(totalEl);
+      list.appendChild(row);
+    });
+    subtotalEl.textContent = money(subtotal);
+    section.hidden = false;
+  })();
   if (statusEl) { statusEl.textContent = "Contacting secure checkout\u2026 this can take a few seconds."; }
   fetch(CHECKOUT_WEBHOOK_URL, {
     method: "POST",
