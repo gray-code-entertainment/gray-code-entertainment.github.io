@@ -37,9 +37,27 @@
   var CHECKOUT_WEBHOOK_URL = "https://hook.us2.make.com/9g453ijur8psesoo6r18rnvflf4i3ma9";
   // NOTE: Meta's products param carries no size, so size is sent empty.
   // The payload shape otherwise matches the site cart exactly.
+  // Meta's catalog uses one variant ID per size (item_group_id is the base
+  // product). Each variant maps to its base product + that size; the size
+  // also goes into the name so it shows on the Stripe checkout line item.
+  // Base IDs (no size) still work exactly as before.
   var PRODUCTS = {
-    "last7-tee": { name: "The Last 7 T-Shirt", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki" },
-    "last7-hoodie": { name: "The Last 7 Hoodie", price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f" }
+    "last7-tee":       { product: "last7-tee",    name: "The Last 7 T-Shirt",            price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "" },
+    "last7-tee-xs":    { product: "last7-tee",    name: "The Last 7 T-Shirt (Size XS)",  price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "XS" },
+    "last7-tee-s":     { product: "last7-tee",    name: "The Last 7 T-Shirt (Size S)",   price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "S" },
+    "last7-tee-m":     { product: "last7-tee",    name: "The Last 7 T-Shirt (Size M)",   price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "M" },
+    "last7-tee-l":     { product: "last7-tee",    name: "The Last 7 T-Shirt (Size L)",   price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "L" },
+    "last7-tee-xl":    { product: "last7-tee",    name: "The Last 7 T-Shirt (Size XL)",  price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "XL" },
+    "last7-tee-2xl":   { product: "last7-tee",    name: "The Last 7 T-Shirt (Size 2XL)", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "2XL" },
+    "last7-tee-3xl":   { product: "last7-tee",    name: "The Last 7 T-Shirt (Size 3XL)", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki", size: "3XL" },
+    "last7-hoodie":    { product: "last7-hoodie", name: "The Last 7 Hoodie",             price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "" },
+    "last7-hoodie-xs": { product: "last7-hoodie", name: "The Last 7 Hoodie (Size XS)",   price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "XS" },
+    "last7-hoodie-s":  { product: "last7-hoodie", name: "The Last 7 Hoodie (Size S)",    price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "S" },
+    "last7-hoodie-m":  { product: "last7-hoodie", name: "The Last 7 Hoodie (Size M)",    price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "M" },
+    "last7-hoodie-l":  { product: "last7-hoodie", name: "The Last 7 Hoodie (Size L)",    price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "L" },
+    "last7-hoodie-xl": { product: "last7-hoodie", name: "The Last 7 Hoodie (Size XL)",   price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "XL" },
+    "last7-hoodie-2xl": { product: "last7-hoodie", name: "The Last 7 Hoodie (Size 2XL)", price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "2XL" },
+    "last7-hoodie-3xl": { product: "last7-hoodie", name: "The Last 7 Hoodie (Size 3XL)", price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f", size: "3XL" }
   };
   var FALLBACK = "/store";
   var link = document.getElementById("manual-link");
@@ -60,8 +78,8 @@
       if (isNaN(qty) || qty < 1) qty = 1;
       if (byId[id]) { byId[id].quantity += qty; }
       else {
-        byId[id] = { product: id, price_id: PRODUCTS[id].price_id,
-                     name: PRODUCTS[id].name, size: "", quantity: qty };
+        byId[id] = { product: PRODUCTS[id].product, price_id: PRODUCTS[id].price_id,
+                     name: PRODUCTS[id].name, size: PRODUCTS[id].size, quantity: qty };
         items.push(byId[id]);
       }
     });
