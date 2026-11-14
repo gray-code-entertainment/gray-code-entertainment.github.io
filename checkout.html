@@ -20,6 +20,7 @@
 <header>GRAY CODE ENTERPRISE</header>
 <main>
   <h1>Taking you to checkout...</h1>
+  <p id="status-line"></p>
   <p>If you are not redirected automatically, tap the button below.</p>
   <a class="checkout-link" id="manual-link" href="/store">Continue to checkout</a>
   <noscript><p><a href="/store">Continue to the store</a></p></noscript>
@@ -27,25 +28,64 @@
 <script>
 (function () {
   // Meta Commerce sends ?products=<id>:<qty>,<id>:<qty> — same format as
-  // Meta's sample checkout controller. Stripe payment links are single
-  // product checkouts, so we send the buyer to the first recognized product.
-  var LINKS = {
-    "last7-tee": "https://buy.stripe.com/aFa6oJ4FD68o71TgVa1Jm00",
-    "last7-hoodie": "https://buy.stripe.com/28E7sN6NLfIYdqh8oE1Jm01"
+  // Meta's sample checkout controller. The old version redirected to the
+  // first product's static Stripe payment link, which dropped everything
+  // else. Instead, the full products list goes to the same Make webhook the
+  // site cart uses, and the buyer is redirected to the Stripe Checkout
+  // Session URL Make returns — so every item and quantity lands in one
+  // checkout.
+  var CHECKOUT_WEBHOOK_URL = "https://hook.us2.make.com/9g453ijur8psesoo6r18rnvflf4i3ma9";
+  // NOTE: Meta's products param carries no size, so size is sent empty.
+  // The payload shape otherwise matches the site cart exactly.
+  var PRODUCTS = {
+    "last7-tee": { name: "The Last 7 T-Shirt", price_id: "price_1UYuFRPPjEaGGXHQ5duaCcki" },
+    "last7-hoodie": { name: "The Last 7 Hoodie", price_id: "price_1UYuG5PPjEaGGXHQbtoPcu2f" }
   };
   var FALLBACK = "/store";
-  var target = FALLBACK;
+  var link = document.getElementById("manual-link");
+  var statusEl = document.getElementById("status-line");
+  function goToStore() {
+    if (link) { link.href = FALLBACK; link.textContent = "Back to the store"; }
+    window.location.replace(FALLBACK);
+  }
+  var items = [];
   try {
     var products = new URLSearchParams(window.location.search).get("products") || "";
-    var pairs = products.split(",");
-    for (var i = 0; i < pairs.length; i++) {
-      var id = (pairs[i].split(":")[0] || "").trim().toLowerCase();
-      if (LINKS[id]) { target = LINKS[id]; break; }
-    }
-  } catch (e) { target = FALLBACK; }
-  var link = document.getElementById("manual-link");
-  if (link) { link.href = target; }
-  setTimeout(function () { window.location.replace(target); }, 600);
+    var byId = {};
+    products.split(",").forEach(function (pair) {
+      var parts = pair.split(":");
+      var id = (parts[0] || "").trim().toLowerCase();
+      if (!PRODUCTS[id]) return;
+      var qty = parseInt(parts[1], 10);
+      if (isNaN(qty) || qty < 1) qty = 1;
+      if (byId[id]) { byId[id].quantity += qty; }
+      else {
+        byId[id] = { product: id, price_id: PRODUCTS[id].price_id,
+                     name: PRODUCTS[id].name, size: "", quantity: qty };
+        items.push(byId[id]);
+      }
+    });
+  } catch (e) { items = []; }
+  if (items.length === 0) { goToStore(); return; }
+  if (statusEl) { statusEl.textContent = "Contacting secure checkout\u2026 this can take a few seconds."; }
+  fetch(CHECKOUT_WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ items: items })
+  })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data && data.checkout_url) {
+        if (link) { link.href = data.checkout_url; }
+        window.location.href = data.checkout_url;
+        return;
+      }
+      throw new Error("no checkout_url");
+    })
+    .catch(function () {
+      if (statusEl) { statusEl.textContent = "Something went wrong \u2014 please try again or head back to the store."; }
+      if (link) { link.href = FALLBACK; link.textContent = "Back to the store"; }
+    });
 })();
 </script>
 </body>
