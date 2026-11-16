@@ -41,6 +41,11 @@ var CHECKOUT_WEBHOOK_URL = "https://hook.us2.make.com/9g453ijur8psesoo6r18rnvflf
   }
   function itemKey(it) { return it.product + "|" + it.size; }
 
+  /* Meta Pixel events (fbq is defined by the base snippet in <head>). */
+  function trackPixel(name, params) {
+    try { if (typeof fbq === "function") fbq("track", name, params); } catch (e) {}
+  }
+
   /* ---------- styles (injected so no page CSS needs editing) ---------- */
 
   var CSS = [
@@ -235,6 +240,9 @@ var CHECKOUT_WEBHOOK_URL = "https://hook.us2.make.com/9g453ijur8psesoo6r18rnvflf
                        priceCents: priceCents, priceId: priceId, image: image });
         }
         saveCart(items);
+        /* One unit is added per click, so the event value is the unit price. */
+        trackPixel("AddToCart", { content_ids: [product], content_type: "product",
+                                value: priceCents / 100, currency: "USD" });
         updateBadge();
         var original = btn.textContent;
         btn.textContent = "Added \u2713";
@@ -292,8 +300,22 @@ var CHECKOUT_WEBHOOK_URL = "https://hook.us2.make.com/9g453ijur8psesoo6r18rnvflf
   /* ---------- init ---------- */
 
   function init() {
-    // Thank-you page clears the cart after a completed order.
+    // Thank-you page: fire a Purchase event from the cart that was just
+    // checked out, then clear the cart. Only when Stripe sent the buyer
+    // here with a session_id (a completed checkout) — a direct visit
+    // with items still in the cart fires nothing. EP payment links never
+    // land here (Stripe shows its own confirmation page), so EP sales
+    // send no Purchase event.
     if (document.body && document.body.dataset.clearCart !== undefined) {
+      try {
+        var qp = new URLSearchParams(window.location.search);
+        var done = loadCart();
+        if (qp.get("session_id") && done.length > 0) {
+          var pids = done.map(function (it) { return it.product; });
+          trackPixel("Purchase", { content_ids: pids, content_type: "product",
+                                  value: cartSubtotalCents(done) / 100, currency: "USD" });
+        }
+      } catch (e) {}
       try { localStorage.removeItem(CART_KEY); } catch (e) {}
     }
     injectCSS();
