@@ -421,8 +421,8 @@ function svcMail(e,key){
   var lines=cfg.fields.map(function(f){return f[0]+': '+v(f[1])}).join('\n');
   var subject=encodeURIComponent('Service Inquiry \u2014 '+cfg.title);
   var body=encodeURIComponent('Service: '+cfg.title+'\n\n'+lines+'\n\n\u2014 Sent from the Gray Code Entertainment website');
-  document.getElementById(cfg.msg).textContent='Opening your email app with the inquiry addressed to bookgce@gmail.com \u2014 just press Send there.';
-  window.location.href='mailto:bookgce@gmail.com?subject='+subject+'&body='+body;
+  document.getElementById(cfg.msg).textContent='Opening your email app with the inquiry addressed to info@graycodeenterprise.net \u2014 just press Send there.';
+  window.location.href='mailto:info@graycodeenterprise.net?subject='+subject+'&body='+body;
   return false;
 }
 </script>
