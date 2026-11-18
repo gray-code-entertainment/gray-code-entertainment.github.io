@@ -170,6 +170,16 @@
   .svc-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
   .svc-card .icon{font-size:28px;margin-bottom:12px}
   .svc-card h3{margin:0 0 8px;font-size:18px} .svc-card p{color:var(--muted);font-size:14px;margin:0}
+  .svc-item{display:flex;flex-direction:column;gap:12px;min-width:0}
+  .svc-card{cursor:pointer;width:100%;text-align:left;font:inherit;color:inherit}
+  .svc-card:hover,.svc-card:focus-visible{border-color:var(--gold)}
+  .svc-card:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .svc-cta{display:block;margin-top:14px;font-size:13px;font-weight:800;color:var(--gold)}
+  .svc-cta .chev{display:inline-block;transition:transform .2s}
+  .svc-card[aria-expanded="true"] .svc-cta .chev{transform:rotate(180deg)}
+  .svc-panel .form{padding:20px}
+  .svc-panel .btn{margin-top:16px;width:100%}
+  .svc-msg{font-size:13px;color:var(--muted);margin:10px 0 0}
   /* Business card feature */
   .bizcard{margin-top:20px;background:#0b0b0c;border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;gap:28px;align-items:center}
   .bizcard img{height:400px;width:auto;max-width:100%;border-radius:10px;display:block;flex-shrink:0}
@@ -249,9 +259,52 @@ src="https://www.facebook.com/tr?id=1113057464948517&ev=PageView&noscript=1"
     <div class="label">What We Do</div>
     <h2>Services</h2>
     <div class="svc">
-      <div class="svc-card"><div class="icon">🎤</div><h3>Artist Management</h3><p>Career direction, releases, and day-to-day support for HoodBoss, Cam Webbe, and future roster artists.</p></div>
-      <div class="svc-card"><div class="icon">📣</div><h3>Promotion</h3><p>Press, radio pitches, playlist outreach, social content, and campaigns through Da Real Good News and Gray Code TV.</p></div>
-      <div class="svc-card"><div class="icon">🎟️</div><h3>Events</h3><p>Showcases, pop-ups, and live events in Boston and beyond — lineups, promo, and production handled in-house.</p></div>
+      <div class="svc-item">
+        <div class="svc-card" role="button" tabindex="0" aria-expanded="false" aria-controls="svcFormMgmt" data-target="svcFormMgmt"><div class="icon">🎤</div><h3>Artist Management</h3><p>Career direction, releases, and day-to-day support for HoodBoss, Cam Webbe, and future roster artists.</p><span class="svc-cta">Tell us what you need <span class="chev" aria-hidden="true">↓</span></span></div>
+        <div class="svc-panel" id="svcFormMgmt" hidden>
+          <form class="form" onsubmit="return svcMail(event,'mgmt')">
+            <label for="mgmtName">Your name</label><input required id="mgmtName" placeholder="Your full name" />
+            <label for="mgmtEmail">Email</label><input type="email" required id="mgmtEmail" placeholder="you@email.com" />
+            <label for="mgmtPhone">Phone</label><input id="mgmtPhone" placeholder="(optional)" />
+            <label for="mgmtNeed">What do you need?</label><select id="mgmtNeed"><option>Full artist management</option><option>Release help</option><option>Career direction</option><option>Day-to-day support</option><option>Other</option></select>
+            <label for="mgmtArtist">Artist name / link</label><input id="mgmtArtist" placeholder="Artist name, Instagram, or music link" />
+            <label for="mgmtNotes">Tell us what you want</label><textarea id="mgmtNotes" rows="3" placeholder="Tell us about the artist and what you want…"></textarea>
+            <button class="btn btn-gold" type="submit">Send inquiry</button>
+            <p class="svc-msg" id="svcMsgMgmt"></p>
+          </form>
+        </div>
+      </div>
+      <div class="svc-item">
+        <div class="svc-card" role="button" tabindex="0" aria-expanded="false" aria-controls="svcFormPromo" data-target="svcFormPromo"><div class="icon">📣</div><h3>Promotion</h3><p>Press, radio pitches, playlist outreach, social content, and campaigns through Da Real Good News and Gray Code TV.</p><span class="svc-cta">Tell us what you want promoted <span class="chev" aria-hidden="true">↓</span></span></div>
+        <div class="svc-panel" id="svcFormPromo" hidden>
+          <form class="form" onsubmit="return svcMail(event,'promo')">
+            <label for="promoName">Your name</label><input required id="promoName" placeholder="Your full name" />
+            <label for="promoEmail">Email</label><input type="email" required id="promoEmail" placeholder="you@email.com" />
+            <label for="promoPhone">Phone</label><input id="promoPhone" placeholder="(optional)" />
+            <label for="promoWhat">What are we promoting?</label><select id="promoWhat"><option>Single or EP</option><option>Event</option><option>Business or brand</option><option>Other</option></select>
+            <label for="promoLink">Link to it</label><input id="promoLink" placeholder="Music, event, or business link" />
+            <label for="promoNotes">Tell us what you want</label><textarea id="promoNotes" rows="3" placeholder="Tell us what you want promoted and what you need…"></textarea>
+            <button class="btn btn-gold" type="submit">Send inquiry</button>
+            <p class="svc-msg" id="svcMsgPromo"></p>
+          </form>
+        </div>
+      </div>
+      <div class="svc-item">
+        <div class="svc-card" role="button" tabindex="0" aria-expanded="false" aria-controls="svcFormEvents" data-target="svcFormEvents"><div class="icon">🎟️</div><h3>Events</h3><p>Showcases, pop-ups, and live events in Boston and beyond — lineups, promo, and production handled in-house.</p><span class="svc-cta">Tell us about your event <span class="chev" aria-hidden="true">↓</span></span></div>
+        <div class="svc-panel" id="svcFormEvents" hidden>
+          <form class="form" onsubmit="return svcMail(event,'events')">
+            <label for="eventName">Your name</label><input required id="eventName" placeholder="Your full name" />
+            <label for="eventEmail">Email</label><input type="email" required id="eventEmail" placeholder="you@email.com" />
+            <label for="eventPhone">Phone</label><input id="eventPhone" placeholder="(optional)" />
+            <label for="eventDate">Event date</label><input type="date" id="eventDate" />
+            <label for="eventCity">City / Location</label><input id="eventCity" placeholder="Boston, MA" />
+            <label for="eventType">Event type</label><select id="eventType"><option>Showcase</option><option>Pop-up</option><option>Club / venue show</option><option>Private / corporate</option><option>Festival</option></select>
+            <label for="eventNotes">Tell us what you want</label><textarea id="eventNotes" rows="3" placeholder="Lineup, venue, budget or door split, anything we should know…"></textarea>
+            <button class="btn btn-gold" type="submit">Send inquiry</button>
+            <p class="svc-msg" id="svcMsgEvents"></p>
+          </form>
+        </div>
+      </div>
     </div>
     <div class="bizcard">
       <img src="assets/gce-business-card.jpg" alt="Gray Code Entertainment business card — Artist Management, Promotion, Events. Boston, Los Angeles, Atlanta. Bookings: bookgce@gmail.com" />
@@ -340,6 +393,37 @@ function toggleMenu(btn){
   var open=m.classList.toggle('open');
   btn.setAttribute('aria-expanded',open?'true':'false');
   btn.textContent=open?'\u00d7':'\u2630';
+}
+</script>
+<script>
+function toggleSvc(card){
+  var panel=document.getElementById(card.getAttribute('aria-controls'));
+  var open=card.getAttribute('aria-expanded')==='true';
+  document.querySelectorAll('.svc-card[aria-expanded="true"]').forEach(function(c){
+    if(c!==card){c.setAttribute('aria-expanded','false');document.getElementById(c.getAttribute('aria-controls')).hidden=true;}
+  });
+  card.setAttribute('aria-expanded',String(!open));
+  panel.hidden=open;
+  if(!open){panel.scrollIntoView({behavior:'smooth',block:'nearest'});}
+}
+document.querySelectorAll('.svc-card[data-target]').forEach(function(card){
+  card.addEventListener('click',function(){toggleSvc(card);});
+  card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleSvc(card);}});
+});
+function svcMail(e,key){
+  e.preventDefault();
+  var cfg={
+    mgmt:{title:'Artist Management',msg:'svcMsgMgmt',fields:[['Name','mgmtName'],['Email','mgmtEmail'],['Phone','mgmtPhone'],['What you need','mgmtNeed'],['Artist / link','mgmtArtist'],['Details','mgmtNotes']]},
+    promo:{title:'Promotion',msg:'svcMsgPromo',fields:[['Name','promoName'],['Email','promoEmail'],['Phone','promoPhone'],['Promote','promoWhat'],['Link','promoLink'],['Details','promoNotes']]},
+    events:{title:'Events',msg:'svcMsgEvents',fields:[['Name','eventName'],['Email','eventEmail'],['Phone','eventPhone'],['Event date','eventDate'],['City / Location','eventCity'],['Event type','eventType'],['Details','eventNotes']]}
+  }[key];
+  var v=function(id){return (document.getElementById(id).value||'').trim()};
+  var lines=cfg.fields.map(function(f){return f[0]+': '+v(f[1])}).join('\n');
+  var subject=encodeURIComponent('Service Inquiry \u2014 '+cfg.title);
+  var body=encodeURIComponent('Service: '+cfg.title+'\n\n'+lines+'\n\n\u2014 Sent from the Gray Code Entertainment website');
+  document.getElementById(cfg.msg).textContent='Opening your email app with the inquiry addressed to bookgce@gmail.com \u2014 just press Send there.';
+  window.location.href='mailto:bookgce@gmail.com?subject='+subject+'&body='+body;
+  return false;
 }
 </script>
 <script src="/assets/cart.js" defer></script>
